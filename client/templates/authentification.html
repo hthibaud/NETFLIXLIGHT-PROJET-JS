@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dosis:wght@200..800&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sekuya&display=swap">
+
+  <style>
+    .font-dosis {
+      font-family: 'Dosis', sans-serif;
+    }
+    .font-sekuya {
+        font-family: 'Sekuya', sans-serif;
+    }
+</style>
+
+
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <title>Authentification</title>
+
+  <link rel="icon" type="image/png" href="../static/img/logo-f-purple.png">
+  <link rel="image" type="image/jpg" href="../static/img/blurred_movies.jpg">
+
+</head>
+
+
+<body class= "min-h-screen
+             bg-[url('../static/img/blurred_movies.jpg')]
+             bg-cover bg-center bg-no-repeat">
+
+  <header class="bg-indigo-950 p-10 text-fuchsia-400">
+
+      <h1 class="font-sekuya text-left text-7xl font-bold">FLIXPORK</h1>
+    <h6 class="font-dosis text-left text-2xl">WHAT WILL YOU WATCH TODAY?</h6>
+
+  </header>
+<div class="flex items-center justify-center p-20">
+<div class="w-full max-w-md bg-white/5 backdrop-blur-lg border border-white/10 p-8 rounded-2xl shadow-2xl">
+            <form action="#" class="space-y-6">
+                <div>
+                    <label class="block text-sm font-medium text-slate-300 mb-2">Mail</label>
+                    <input type="email" 
+                           placeholder="name@flixpork.com" 
+                           class="w-full px-4 py-3 rounded-xl bg-slate-900/50 border border-slate-700 text-white focus:outline-none focus:ring-2 focus:ring-fuchsia-400 focus:border-transparent transition duration-200">
+                </div>
+
+                <div>
+                    <div class="flex justify-between mb-2">
+                        <label class="text-sm font-medium text-slate-300">Password</label>
+                    </div>
+                    <input type="password" 
+                           placeholder="••••••••" 
+                           class="w-full px-4 py-3 rounded-xl bg-slate-900/50 border border-slate-700 text-white focus:outline-none focus:ring-2 focus:ring-fuchsia-400 focus:border-transparent transition duration-200">
+                </div>
+
+                <button type="submit" 
+                        class="w-full py-3 px-4 bg-indigo-950/90 hover:bg-indigo-950 text-fuchsia-400 font-bold rounded-xl shadow-lg transform">
+                    Submit
+                </button>
+            </form>
+             <div class="flex justify-center items-center">
+                <a href="/allmovies"
+                    class="font-dosis text-fuchsia-400 text-1xl py-3 px-6 hover:text-blue-500">
+                browse films as a guest ->
+                </a>
+            </div>
+            </div>
+</body>
+</html>
