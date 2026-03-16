@@ -8,8 +8,14 @@ app.use('/static', express.static(path.join(__dirname, '../client/static')));
 
 // Main route creation
 app.get('/', (req, res) => {
-    // On envoie le fichier index.html qui se trouve dans le dossier templates
+    // index.html -> first file loaded when you launch the server
     res.sendFile(path.join(__dirname, '../client/templates/index.html'));
+});
+
+// route to display all the movies of the API
+app.get('/allmovies', (req, res) => {
+    // route to allmovies.html for the button "browse"
+    res.sendFile(path.join(__dirname, '../client/templates/allmovies.html'));
 });
 
 // server launch
