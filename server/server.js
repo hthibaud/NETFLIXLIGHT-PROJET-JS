@@ -22,7 +22,6 @@ app.get('/index', (req, res) => {
     res.sendFile(path.join(__dirname, '../client/templates/index.html'));
 });
 
-
 // server launch
 app.listen(port, () => {
     console.log(`Serveur démarré sur http://localhost:${port}`);
