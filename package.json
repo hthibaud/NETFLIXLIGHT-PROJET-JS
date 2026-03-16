@@ -16,7 +16,6 @@
     "url": "https://github.com/hthibaud/NETFLIXLIGHT-PROJET-JS/issues"
   },
   "homepage": "https://github.com/hthibaud/NETFLIXLIGHT-PROJET-JS#readme",
-
   "dependencies": {
     "dotenv": "^17.3.1",
     "express": "^5.2.1"
