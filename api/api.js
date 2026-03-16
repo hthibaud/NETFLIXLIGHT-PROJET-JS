@@ -1,4 +1,4 @@
-require('dotenv').config(); // Charge les variables d'environnement
+require('dotenv').config();
 
 fetch(`https://api.themoviedb.org/3/movie/550?api_key=${process.env.TMDB_TOKEN}`)
   .then(res => res.json())
