@@ -10,10 +10,27 @@ async function fetchMovies() {
     const moviesContainer = document.getElementById('movies');
     moviesContainer.innerHTML = ''; // reset container
     console.log(movies);
+
     movies.forEach(movie => {
-      const div = document.createElement('div');
-      div.textContent = movie.title;
-      moviesContainer.appendChild(div);
+      const card = document.createElement('div');
+      card.className = "bg-slate-800 p-4 rounded-lg shadow-lg flex flex-col items-center hover:scale-105 transition transform";
+
+      // image
+      if (movie.poster_path) {
+        const img = document.createElement('img');
+        img.src = `https://image.tmdb.org/t/p/w300${movie.poster_path}`;
+        img.alt = movie.title;
+        img.className = "rounded-lg shadow-md mb-4"; // cadre et ombre
+        card.appendChild(img);
+      }
+
+      // titre
+      const title = document.createElement('h3');
+      title.textContent = movie.title;
+      title.className = "font-sekuya text-xl font-bold text-fuchsia-300 text-center";
+      card.appendChild(title);
+
+      moviesContainer.appendChild(card);
     });
   } catch (err) {
     console.error(err);
@@ -31,9 +48,6 @@ document.getElementById('next').addEventListener('click', () => {
   page++;
   fetchMovies();
 });
-
-// fetch initial
-fetchMovies();
 
 // fetch initial
 fetchMovies();
