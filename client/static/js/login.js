@@ -1,5 +1,5 @@
 document.getElementById('loginForm').addEventListener('submit', async (e) => {
-        e.preventDefault(); // Empêche la page de se recharger toute seule
+        e.preventDefault(); // The page won't reload itself
 
         // Grab the values of the inputs
         const user = document.getElementById('loginUser').value;
@@ -22,7 +22,7 @@ document.getElementById('loginForm').addEventListener('submit', async (e) => {
 
             // Print the result
             if (data.success) {
-                msgBox.textContent = "✅ " + data.message;
+                msgBox.textContent = "SUCCESS" + data.message;
                 msgBox.className = "mt-4 text-center font-dosis font-bold text-green-400";
 
                 // Redirection to the page of all movies after 1 second
