@@ -71,8 +71,8 @@ app.post('/api/register', (req, res) => {
     const { username, password } = req.body;
     // inserting in SQL
     db.run(`INSERT INTO users (username, password) VALUES (?, ?)`, [username, password], function(err) {
-        if (err) return res.json({ success: false, message: "Ce pseudo existe déjà !" });
-        res.json({ success: true, message: "Compte créé ! Connecte-toi maintenant." });
+        if (err) return res.json({ success: false, message: "This pseudo already exists!" });
+        res.json({ success: true, message: "Account created! log-in now!"});
     });
 });
 
@@ -81,8 +81,8 @@ app.post('/api/login', (req, res) => {
     const { username, password } = req.body;
     // verifies if the password and the username are matching
     db.get(`SELECT * FROM users WHERE username = ? AND password = ?`, [username, password], (err, user) => {
-        if (!user) return res.json({ success: false, message: "Pseudo ou mot de passe incorrect." });
-        res.json({ success: true, message: "Bienvenue " + user.username, username: user.username });
+        if (!user) return res.json({ success: false, message: "Wrong pseudo or password" });
+        res.json({ success: true, message: "Welcome" + user.username, username: user.username });
     });
 });
 

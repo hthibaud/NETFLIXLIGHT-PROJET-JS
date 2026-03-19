@@ -9,7 +9,7 @@ document.getElementById('registerForm').addEventListener('submit', async (e) => 
 
         // Loading effect *style*
         msgBox.textContent = "Creating account...";
-        msgBox.className = "mt-4 text-center font-dosis font-bold text-slate-400";
+        msgBox.className = "mt-4 text-center font-dosis font- text-fuchsia-500";
 
         try {
             // send the data to the server (route /api/register)
@@ -24,20 +24,20 @@ document.getElementById('registerForm').addEventListener('submit', async (e) => 
 
             // Print result
             if (data.success) {
-                msgBox.textContent = "SUCCESS" + data.message;
-                msgBox.className = "mt-4 text-center font-dosis font-bold text-green-400";
+                msgBox.textContent = data.message;
+                msgBox.className = "mt-4 text-center font-dosis font text-green-500";
                 // 2 seconds timeout 
                 setTimeout(() => {
                     window.location.href = '/'; 
                 }, 2000);
             } else {
-                msgBox.textContent = "NOPE" + data.message;
-                msgBox.className = "mt-4 text-center font-dosis font-bold text-red-400";
+                msgBox.textContent = data.message;
+                msgBox.className = "mt-4 text-center font-dosis font text-red-400";
             }
 
         } catch (error) {
             console.error('Erreur:', error);
             msgBox.textContent = "Server error. Is the server running?";
-            msgBox.className = "mt-4 text-center font-dosis font-bold text-red-400";
+            msgBox.className = "mt-4 text-center font-dosis font text-red-400";
         }
     });
