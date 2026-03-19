@@ -27,7 +27,7 @@ async function fetchMovies() {
       // titre
       const title = document.createElement('h3');
       title.textContent = movie.title;
-      title.className = "font-sekuya text-xl font-bold text-fuchsia-300 text-center";
+      title.className = "font-dosis text-xl font-bold text-fuchsia-300 text-center";
       card.appendChild(title);
 
       moviesContainer.appendChild(card);
