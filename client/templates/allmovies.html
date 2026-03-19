@@ -30,16 +30,22 @@
 </head>
 
 
-<body class= "bg-slate-900">
+<body class="bg-slate-900 text-white">
 
   <header class="bg-indigo-950 p-10 text-fuchsia-400">
-
-      <h1 class="font-sekuya text-left text-7xl font-bold">OUR MOVIES</h1>
-    <h6 class="font-sekuya text-left text-2xl">FLIXPORK</h6>
-
+    <h1 class="font-sekuya text-7xl font-bold">OUR MOVIES</h1>
+    <h6 class="font-sekuya text-2xl">FLIXPORK</h6>
   </header>
 
-  <script type="module" src="../src/app.js"></script>
+  <main class="p-10">
+    <div id="movies" class="space-y-2"></div>
 
+    <div class="mt-10 flex gap-4">
+      <button id="prev" class="bg-indigo-600 px-4 py-2 rounded">Précédent</button>
+      <button id="next" class="bg-indigo-600 px-4 py-2 rounded">Suivant</button>
+    </div>
+  </main>
+
+  <script type="module" src="../../api/everymovie.js"></script>
 </body>
 </html>

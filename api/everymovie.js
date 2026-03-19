@@ -1,38 +1,39 @@
+let page = 1;
+let sort = 'popularity.desc';
+let language = 'fr-FR';
 
+async function fetchMovies() {
+  try {
+    const res = await fetch(`/api/movies?page=${page}`);
+    const movies = await res.json();
 
-const { URL } = require('node:url');
-
-require('dotenv').config();
-
-page = 2;
-
-sort = 'popularity.desc';
-
-language = 'fr-FR';
-
-
-// -- Popular movies -- {{.popular}} --
-
-popular =`https://api.themoviedb.org/3/movie/popular?api_key=${process.env.TMDB_TOKEN}&language=${language}&page=${page}`;
-
-
-// -- Every movie API -- {{.all}} --
-
-all =`https://api.themoviedb.org/3/discover/movie?api_key=${process.env.TMDB_TOKEN}&language=${language}&sort_by=${sort}&page=${page}`;
-
-// fetch(all)
-//   .then(res => res.json())
-//   .then(res => console.log(res))
-//   .catch(err => console.error(err));
-
-fetch(all)
-  .then(res => res.json())
-  .then(data => {
-    data.results.forEach(movie => {
-      console.log(movie.title);
+    const moviesContainer = document.getElementById('movies');
+    moviesContainer.innerHTML = ''; // reset container
+    console.log(movies);
+    movies.forEach(movie => {
+      const div = document.createElement('div');
+      div.textContent = movie.title;
+      moviesContainer.appendChild(div);
     });
-  })
-  .catch(err => console.error(err));
+  } catch (err) {
+    console.error(err);
+  }
+}
 
+// pagination
+document.getElementById('prev').addEventListener('click', () => {
+  if (page > 1) {
+    page--;
+    fetchMovies();
+  }
+});
+document.getElementById('next').addEventListener('click', () => {
+  page++;
+  fetchMovies();
+});
 
+// fetch initial
+fetchMovies();
 
+// fetch initial
+fetchMovies();
