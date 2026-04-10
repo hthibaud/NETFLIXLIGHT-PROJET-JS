@@ -38,13 +38,24 @@ async function fetchMovies() {
 }
 
 // pagination
-document.getElementById('prev').addEventListener('click', () => {
+document.getElementById('prev-top').addEventListener('click', () => {
   if (page > 1) {
     page--;
     fetchMovies();
   }
 });
-document.getElementById('next').addEventListener('click', () => {
+document.getElementById('next-top').addEventListener('click', () => {
+  page++;
+  fetchMovies();
+});
+
+document.getElementById('prev-bottom').addEventListener('click', () => {
+  if (page > 1) {
+    page--;
+    fetchMovies();
+  }
+});
+document.getElementById('next-bottom').addEventListener('click', () => {
   page++;
   fetchMovies();
 });
