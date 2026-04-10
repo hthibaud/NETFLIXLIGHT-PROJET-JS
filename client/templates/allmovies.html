@@ -32,7 +32,7 @@
 
 <body class="bg-slate-900 text-white">
 
-  <header class="bg-indigo-950 p-10 text-fuchsia-400">
+  <header class="bg-indigo-950 p-10 text-fuchsia-400 relative">
     <h1 class="font-sekuya text-7xl font-bold">Research</h1>
     <h6 class="font-sekuya text-2xl">FLIXPORK</h6>
 <div class = "absolute bottom-4 right-10 flex items-center gap-4">
@@ -57,12 +57,14 @@
 </div>
   </header>
 
+  
+  <main class="p-10">
+
   <div class="mt-10 flex gap-4">
     <button id="prev-top" class="bg-indigo-950 px-4 py-2 rounded hover:bg-indigo-700 transition">Previous</button>
     <button id="next-top" class="bg-indigo-950 px-4 py-2 rounded hover:bg-indigo-700 transition">Next</button>
   </div>
-  
-  <main class="p-10">
+
     <div id="movies" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"></div>
 
     <div class="mt-10 flex gap-4">

@@ -27,6 +27,7 @@
   <link rel="icon" type="image/png" href="../static/img/logo-f-purple.png">
   <link rel="image" type="image/jpg" href="../static/img/blurred_movies.jpg">
 
+
 </head>
 
 
@@ -34,17 +35,36 @@
              bg-[url('../static/img/blurred_movies.jpg')]
              bg-cover bg-center bg-no-repeat">
 
-    <header class="bg-indigo-950 p-10 text-fuchsia-400">
+    <header class="bg-indigo-950 p-10 text-fuchsia-400 relative">
 
         <h1 class="font-sekuya text-left text-7xl font-bold">FLIXPORK</h1>
-      <h6 class="font-dosis text-left text-2xl">Movies</h6>
+      <h6 class="font-dosis text-left text-4xl">Our movies</h6>
+
+      <div class = "absolute bottom-4 right-10 flex items-center gap-4">
+
+        <h6 class = "font-dosis text-fuchsia-400" >
+        Your profile
+      </h6>
+
+  <button id="avatarBtn" 
+            class="w-12 h-12 rounded-full border-2 border-fuchsia-500 
+                   overflow-hidden shadow-lg hover:scale-110 
+                   hover:border-fuchsia-300 transition-all duration-300">
+      
+      <img src="/static/img/logo-f-purple.png" 
+           alt="User Avatar" 
+           class="w-full h-full object-cover">
+           
+    </button>
+
+</div>
 
     </header>
 
     <main class="p-10 space-y-12">
 
       <section>
-        <h2 class="text-3xl text-fuchsia-300 mb-4 font-dosis">Populaires</h2>
+        <h2 class="text-3xl text-fuchsia-300 mb-4 font-dosis">Popular</h2>
         <div id="popular" class="flex gap-4 overflow-x-auto scrollbar-hide"></div>
       </section>
 
@@ -60,18 +80,6 @@
 
     </main>
 
-
-  <div class="absolute bottom-20 right-20">
-   <div>
-    <a href="/allmovies"
-       class="font-sekuya text-fuchsia-400 text-1xl py-3 px-6 rounded-lg shadow-lg 
-              bg-indigo-900 hover:bg-indigo-950 
-              relative overflow-hidden
-              glow-btn transition">
-         BROWSE ➔
-      </a>
-    </div>
-  </div>
   <script type="module" src="../../api/carroussel.js"></script>
 </body>
 </html>

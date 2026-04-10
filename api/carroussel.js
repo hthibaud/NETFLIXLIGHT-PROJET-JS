@@ -43,6 +43,10 @@ async function fetchMovies(category, containerId) {
   }
 }
 
+document.getElementById('avatarBtn').addEventListener('click', () => {
+  window.location.href = '/profile'
+});
+
 fetchMovies('upcoming', 'upcoming');
 fetchMovies('popular', 'popular');
 fetchMovies('top_rated', 'top-rated');
