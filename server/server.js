@@ -24,7 +24,6 @@ app.use(express.json());
 require('dotenv').config();
 const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
 
-// route pour récupérer les films populaires
 app.get('/api/movies', async (req, res) => {
     const page = req.query.page || 1;
     const language = 'fr-FR';
