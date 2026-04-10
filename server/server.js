@@ -24,11 +24,11 @@ app.use(express.json());
 require('dotenv').config();
 const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
 
-// route pour récupérer les films populaires
 app.get('/api/movies', async (req, res) => {
     const page = req.query.page || 1;
+    const category = req.query.category || 'popular';
     const language = 'fr-FR';
-    const url = `https://api.themoviedb.org/3/movie/popular?api_key=${process.env.TMDB_TOKEN}&language=${language}&page=${page}`;
+    const url = `https://api.themoviedb.org/3/movie/${category}?api_key=${process.env.TMDB_TOKEN}&language=${language}&page=${page}`;
 
     try {
         const response = await fetch(url);
@@ -60,6 +60,10 @@ app.get('/allmovies', (req, res) => {
 app.get('/account_creation', (req, res) => {
     // route to allmovies.html for the button "browse"
     res.sendFile(path.join(__dirname, '../client/templates/account_creation.html'));
+});
+
+app.get('/carroussel', (req, res) => {
+    res.sendFile(path.join(__dirname, '../client/templates/carroussel.html'));
 });
 
 app.get('/index', (req, res) => {

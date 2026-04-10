@@ -32,8 +32,8 @@
 
 <body class="bg-slate-900 text-white">
 
-  <header class="bg-indigo-950 p-10 text-fuchsia-400 relative">
-    <h1 class="font-sekuya text-7xl font-bold">OUR MOVIES</h1>
+  <header class="bg-indigo-950 p-10 text-fuchsia-400">
+    <h1 class="font-sekuya text-7xl font-bold">Research</h1>
     <h6 class="font-sekuya text-2xl">FLIXPORK</h6>
 <div class = "absolute bottom-4 right-10 flex items-center gap-4">
 
@@ -57,20 +57,17 @@
 </div>
   </header>
 
+  <div class="mt-10 flex gap-4">
+    <button id="prev-top" class="bg-indigo-950 px-4 py-2 rounded hover:bg-indigo-700 transition">Previous</button>
+    <button id="next-top" class="bg-indigo-950 px-4 py-2 rounded hover:bg-indigo-700 transition">Next</button>
+  </div>
+  
   <main class="p-10">
-      <h2 id="welcome-msg" class="font-dosis text-2xl text-fuchsia-400"></h2> 
-    <div class="mt-10 flex gap-4">
-      <button id="prev" class="bg-indigo-950 px-4 py-2 rounded hover:bg-indigo-700 transition">Previous</button>
-      <button id="next" class="bg-indigo-950 px-4 py-2 rounded hover:bg-indigo-700 transition">Next</button>
-    </div>
     <div id="movies" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"></div>
 
     <div class="mt-10 flex gap-4">
-      <button id="prev" class="bg-indigo-950 px-4 py-2 rounded hover:bg-indigo-700 transition">Previous</button>
-      <button id="next" class="bg-indigo-950 px-4 py-2 rounded hover:bg-indigo-700 transition">Next</button>
-    <button id="logoutBtn" class="bg-red-900 text-white px-4 py-2 rounded text-sm w-fit">
-      Logout
-    </button>
+      <button id="prev-bottom" class="bg-indigo-950 px-4 py-2 rounded hover:bg-indigo-700 transition">Previous</button>
+      <button id="next-bottom" class="bg-indigo-950 px-4 py-2 rounded hover:bg-indigo-700 transition">Next</button>
     </div>
 
   </main>
