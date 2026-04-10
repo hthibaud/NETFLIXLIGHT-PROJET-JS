@@ -9,7 +9,7 @@ const db = new sqlite3.Database('./users.db', (err) => {
     if (err) console.error("Erreur DB:", err);
     else {
         console.log("connected to the database (file users.db created!)");
-        // creating the table if it does not exist yet
+        // creating the table if it does not exist yet (with username/password)
         db.run(`CREATE TABLE IF NOT EXISTS users (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             username TEXT UNIQUE NOT NULL,
