@@ -49,5 +49,29 @@ document.getElementById('next').addEventListener('click', () => {
   fetchMovies();
 });
 
+document.addEventListener('DOMContentLoaded', () => {
+const pseudo = localStorage.getItem('userPseudo') || "Guest";    
+    if (pseudo) {
+        const welcomeMessage = document.getElementById('welcome-msg');
+        if (welcomeMessage) {
+            welcomeMessage.textContent = `Nice to see you again, ${pseudo} !`;
+        }
+    } else {
+        // window.location.href = '/';
+    }
+
+    const logoutBtn = document.getElementById('logoutBtn');
+    if (logoutBtn) {
+        logoutBtn.addEventListener('click', () => {
+            localStorage.clear();
+            window.location.href = '/';
+        });
+    }
+});
+
+document.getElementById('avatarBtn').addEventListener('click', () => {
+  window.location.href = '/profile'
+});
+
 // fetch initial
 fetchMovies();

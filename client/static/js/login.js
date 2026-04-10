@@ -22,13 +22,17 @@ document.getElementById('loginForm').addEventListener('submit', async (e) => {
 
             // Print the result
             if (data.success) {
+
+                localStorage.setItem('userPseudo', data.username);
+                localStorage.setItem('authToken', data.token);
+
                 msgBox.textContent = data.message;
                 msgBox.className = "mt-4 text-center font-dosis font text-green-500";
 
-                // Redirection to the page of all movies after 1 second
+                // Redirection to home page after 0.5 second
                 setTimeout(() => {
-                    window.location.href = '/allmovies'; 
-                }, 1000);
+                    window.location.href = '/index'; 
+                }, 500);
             } else {
                 msgBox.textContent = data.message;
                 msgBox.className = "mt-4 text-center font-dosis font text-red-400";

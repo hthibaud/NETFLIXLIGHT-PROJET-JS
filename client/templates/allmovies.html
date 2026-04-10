@@ -32,25 +32,49 @@
 
 <body class="bg-slate-900 text-white">
 
-  <header class="bg-indigo-950 p-10 text-fuchsia-400">
+  <header class="bg-indigo-950 p-10 text-fuchsia-400 relative">
     <h1 class="font-sekuya text-7xl font-bold">OUR MOVIES</h1>
     <h6 class="font-sekuya text-2xl">FLIXPORK</h6>
+<div class = "absolute bottom-4 right-10 flex items-center gap-4">
+
+        <h6 class = "font-dosis text-fuchsia-400" >
+        Your profile
+      </h6>
+
+  <button id="avatarBtn" 
+            class="w-12 h-12 rounded-full border-2 border-fuchsia-500 
+                   overflow-hidden shadow-lg hover:scale-110 
+                   hover:border-fuchsia-300 transition-all duration-300">
+      
+      <img src="/static/img/logo-f-purple.png" 
+           alt="User Avatar" 
+           class="w-full h-full object-cover">
+
+
+           
+    </button>
+
+</div>
   </header>
 
-
-
   <main class="p-10">
+      <h2 id="welcome-msg" class="font-dosis text-2xl text-fuchsia-400"></h2> 
     <div class="mt-10 flex gap-4">
-      <button id="prev" class="bg-indigo-600 px-4 py-2 rounded hover:bg-indigo-700 transition">Précédent</button>
-      <button id="next" class="bg-indigo-600 px-4 py-2 rounded hover:bg-indigo-700 transition">Suivant</button>
+      <button id="prev" class="bg-indigo-950 px-4 py-2 rounded hover:bg-indigo-700 transition">Previous</button>
+      <button id="next" class="bg-indigo-950 px-4 py-2 rounded hover:bg-indigo-700 transition">Next</button>
     </div>
     <div id="movies" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"></div>
 
     <div class="mt-10 flex gap-4">
       <button id="prev" class="bg-indigo-950 px-4 py-2 rounded hover:bg-indigo-700 transition">Previous</button>
       <button id="next" class="bg-indigo-950 px-4 py-2 rounded hover:bg-indigo-700 transition">Next</button>
+    <button id="logoutBtn" class="bg-red-900 text-white px-4 py-2 rounded text-sm w-fit">
+      Logout
+    </button>
     </div>
+
   </main>
+
 
   <script type="module" src="../../api/everymovie.js"></script>
 </body>

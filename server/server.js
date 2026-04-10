@@ -76,6 +76,10 @@ app.post('/api/register', (req, res) => {
     });
 });
 
+app.get('/profile', (req, res) => {
+    res.sendFile(path.join(__dirname, '../client/templates/profile.html'));
+});
+
 // login for the user
 app.post('/api/login', (req, res) => {
     const { username, password } = req.body;

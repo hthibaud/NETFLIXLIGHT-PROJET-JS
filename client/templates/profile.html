@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dosis:wght@200..800&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sekuya&display=swap">
+
+  <style>
+    .font-dosis {
+      font-family: 'Dosis', sans-serif;
+    }
+    .font-sekuya {
+        font-family: 'Sekuya', sans-serif;
+    }
+</style>
+
+
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <title>Profile</title>
+
+  <link rel="icon" type="image/png" href="../static/img/logo-f-purple.png">
+  <link rel="image" type="image/jpg" href="../static/img/blurred_movies.jpg">
+
+</head>
+
+<main>
+<body class="bg-slate-900 text-white">
+
+  <header class="bg-indigo-950 p-10 text-fuchsia-400">
+    <h1 id = "banner-pseudo" class="font-sekuya text-7xl font-bold"></h1>
+    <h6 class="font-sekuya text-2xl">FLIXPORK</h6>
+
+  </header>
+
+    <div class="mt-10 flex gap-4">
+    <button id="logoutBtn" class="bg-red-900 text-white px-4 py-2 rounded text-sm w-fit">
+      Logout
+    </button>
+    </div>
+
+  </main>
+
+
+  <script type="module" src="../../api/profile.js"></script>
+</body>
+</html>
