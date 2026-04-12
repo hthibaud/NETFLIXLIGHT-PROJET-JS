@@ -60,10 +60,25 @@
   
   <main class="p-10">
 
-  <div class="mt-10 flex gap-4">
-    <button id="prev-top" class="bg-indigo-950 px-4 py-2 rounded hover:bg-indigo-700 transition">Previous</button>
-    <button id="next-top" class="bg-indigo-950 px-4 py-2 rounded hover:bg-indigo-700 transition">Next</button>
-  </div>
+    <div class="mt-6 flex gap-4 items-center">
+      <input 
+        id="searchInput"
+        type="text" 
+        placeholder="Rechercher un film..."
+        class="px-4 py-2 rounded bg-slate-800 border border-fuchsia-500 focus:outline-none focus:ring-2 focus:ring-fuchsia-400 w-full"
+      >
+
+      <button 
+        id="searchBtn"
+        class="bg-fuchsia-600 px-4 py-2 rounded hover:bg-fuchsia-500 transition">
+        Rechercher
+      </button>
+    </div>
+
+    <div class="mt-10 flex gap-4">
+      <button id="prev-top" class="bg-indigo-950 px-4 py-2 rounded hover:bg-indigo-700 transition">Previous</button>
+      <button id="next-top" class="bg-indigo-950 px-4 py-2 rounded hover:bg-indigo-700 transition">Next</button>
+    </div>
 
     <div id="movies" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"></div>
 

@@ -3,6 +3,8 @@ let language = 'fr-FR';
 
 console.log("d:", document.getElementById('upcoming'));
 
+//Upcoming movies, Popular movies, Top rated movies API calls
+
 async function fetchMovies(category, containerId) {
   try {
     const res = await fetch(`/api/movies?category=${category}&page=${page}`);
@@ -50,3 +52,9 @@ document.getElementById('avatarBtn').addEventListener('click', () => {
 fetchMovies('upcoming', 'upcoming');
 fetchMovies('popular', 'popular');
 fetchMovies('top_rated', 'top-rated');
+
+
+
+//Genres API call
+
+
