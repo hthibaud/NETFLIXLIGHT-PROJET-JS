@@ -37,8 +37,10 @@ app.get('/api/movies', async (req, res) => {
     
     if (genre) {
         url = `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&language=${language}&page=${page}&with_genres=${genre}`;
-    } else {
+    } else if (category) {
         url = `https://api.themoviedb.org/3/movie/${category}?api_key=${apiKey}&language=${language}&page=${page}`;
+    } else {
+        url = `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=${language}&page=${page}`;
     }
 
     try {

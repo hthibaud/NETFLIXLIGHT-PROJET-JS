@@ -1,12 +1,22 @@
 async function fetchHeroMovies() {
   try {
-    const res = await fetch(`/api/movies?page=1&sort_by=popularity.desc`);
+    const res = await fetch(`/api/movies?category=popular&page=1`);
     const movies = await res.json();
 
     const slider = document.getElementById('hero-slider');
+    if (!slider) {
+      console.error('hero-slider element introuvable');
+      return;
+    }
     slider.innerHTML = '';
 
-    movies.slice(0, 10).forEach((movie, i) => {
+    const heroMovies = movies.slice(0, 10);
+    if (!heroMovies.length) {
+      console.warn('Aucun film disponible pour la bannière');
+      return;
+    }
+
+    heroMovies.forEach((movie, i) => {
       if (!movie.backdrop_path) return;
 
       const slide = document.createElement('div');
@@ -46,6 +56,8 @@ async function fetchHeroMovies() {
 
 function startHeroSlider() {
   const slides = document.querySelectorAll('.hero-slide');
+  if (!slides.length) return;
+
   let index = 0;
 
   setInterval(() => {
