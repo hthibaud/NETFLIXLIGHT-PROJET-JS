@@ -13,8 +13,9 @@ async function fetchMovies(category, containerId) {
     const container = document.getElementById(containerId);
     container.innerHTML = "";
 
-    movies.forEach((movie) => {
-      const card = document.createElement("div");
+    movies.forEach(movie => {
+      const card = document.createElement('button');
+      card.type = 'button';
       card.className = `
         min-w-[250px]
         bg-slate-800 p-3 rounded-lg shadow-lg 
@@ -38,6 +39,10 @@ async function fetchMovies(category, containerId) {
         "font-dosis text-sm text-fuchsia-300 text-center";
       card.appendChild(title);
 
+      card.addEventListener('click', () => {
+        window.location.href = `/movie_details?id=${movie.id}`;
+      });
+
       container.appendChild(card);
     });
   } catch (err) {
@@ -57,6 +62,8 @@ fetchMoviesByGenre(28, "action"); // Action
 fetchMoviesByGenre(35, "comedy"); // Comedy
 fetchMoviesByGenre(18, "drama"); // Drama
 
+
+
 //Genres API call
 
 // FETCH MOVIES BY GENRE
@@ -69,9 +76,15 @@ async function fetchMoviesByGenre(genreId, containerId) {
     if (!container) return; 
     container.innerHTML = "";
 
-    movies.forEach((movie) => {
-      const card = document.createElement("div");
-      card.className = `min-w-[250px] bg-slate-800 p-3 rounded-lg shadow-lg flex flex-col items-center hover:scale-105 transition transform flex-shrink-0`;
+    movies.forEach(movie => {
+      const card = document.createElement('button');
+      card.type = 'button';
+      card.className = `
+        min-w-[180px]
+        bg-slate-800 p-3 rounded-lg shadow-lg 
+        flex flex-col items-center 
+        hover:scale-105 transition transform
+      `;
 
       if (movie.poster_path) {
         const img = document.createElement("img");
@@ -84,6 +97,10 @@ async function fetchMoviesByGenre(genreId, containerId) {
       title.textContent = movie.title;
       title.className = "font-dosis text-sm text-fuchsia-400 text-center whitespace-normal";
       card.appendChild(title);
+
+      card.addEventListener('click', () => {
+        window.location.href = `/movie_details?id=${movie.id}`;
+      });
 
       container.appendChild(card);
     });
