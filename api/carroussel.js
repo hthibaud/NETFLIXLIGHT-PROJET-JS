@@ -17,7 +17,7 @@ async function fetchMovies(category, containerId) {
       const card = document.createElement('button');
       card.type = 'button';
       card.className = `
-        min-w-[250px]
+        min-w-[300px]
         bg-slate-800 p-3 rounded-lg shadow-lg 
         flex flex-col items-center 
         hover:scale-105 transition transform
@@ -80,7 +80,7 @@ async function fetchMoviesByGenre(genreId, containerId) {
       const card = document.createElement('button');
       card.type = 'button';
       card.className = `
-        min-w-[250px]
+        min-w-[300px]
         bg-slate-800 p-3 rounded-lg shadow-lg 
         flex flex-col items-center 
         hover:scale-105 transition transform
