@@ -67,6 +67,39 @@ app.get('/api/movies', async (req, res) => {
     }
 });
 
+// API route for single movie
+app.get('/api/movie/:id', async (req, res) => {
+    const id = req.params.id;
+    const language = 'fr-FR';
+
+    const movieUrl = `https://api.themoviedb.org/3/movie/${id}?api_key=${process.env.TMDB_TOKEN}&language=${language}`;
+
+    try {
+        const response = await fetch(movieUrl);
+        const movie = await response.json();
+        res.json(movie);
+    } catch (err) {
+        res.status(500).json({ error: 'Impossible de récupérer le film' });
+    }
+});
+
+// API route for movies by genre
+app.get('/api/movies/genre', async (req, res) => {
+    const genreId = req.query.genre || 35;
+    const page = req.query.page || 1;
+    const language = 'fr-FR';
+
+    const moviesUrl = `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.TMDB_TOKEN}&language=${language}&page=${page}&with_genres=${genreId}`;
+
+    try {
+        const response = await fetch(moviesUrl);
+        const data = await response.json();
+        res.json(data.results);
+    } catch (err) {
+        res.status(500).json({ error: 'Impossible de récupérer les films par genre' });
+    }
+});
+
 // Serves the static files
 app.use('/static', express.static(path.join(__dirname, '../client/static')));
 
@@ -92,6 +125,10 @@ app.get('/account_creation', (req, res) => {
 
 app.get('/carroussel', (req, res) => {
     res.sendFile(path.join(__dirname, '../client/templates/carroussel.html'));
+});
+
+app.get('/movie_details', (req, res) => {
+    res.sendFile(path.join(__dirname, '../client/templates/movie_details.html'));
 });
 
 app.get('/index', (req, res) => {

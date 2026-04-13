@@ -14,7 +14,8 @@ async function fetchMovies(category, containerId) {
     container.innerHTML = '';
 
     movies.forEach(movie => {
-      const card = document.createElement('div');
+      const card = document.createElement('button');
+      card.type = 'button';
       card.className = `
         min-w-[180px]
         bg-slate-800 p-3 rounded-lg shadow-lg 
@@ -36,6 +37,10 @@ async function fetchMovies(category, containerId) {
       title.textContent = movie.title;
       title.className = "font-dosis text-sm font-bold text-fuchsia-300 text-center";
       card.appendChild(title);
+
+      card.addEventListener('click', () => {
+        window.location.href = `/movie_details?id=${movie.id}`;
+      });
 
       container.appendChild(card);
     });
@@ -56,6 +61,8 @@ fetchMovies('now_playing', 'now_playing');
 
 
 
+
+
 //Genres API call
 
 // FETCH MOVIES BY GENRE
@@ -68,7 +75,8 @@ async function fetchMoviesByGenre(genreId, containerId) {
     container.innerHTML = '';
 
     movies.forEach(movie => {
-      const card = document.createElement('div');
+      const card = document.createElement('button');
+      card.type = 'button';
       card.className = `
         min-w-[180px]
         bg-slate-800 p-3 rounded-lg shadow-lg 
@@ -90,6 +98,10 @@ async function fetchMoviesByGenre(genreId, containerId) {
       title.textContent = movie.title;
       title.className = "font-dosis text-sm font-bold text-fuchsia-300 text-center";
       card.appendChild(title);
+
+      card.addEventListener('click', () => {
+        window.location.href = `/movie_details?id=${movie.id}`;
+      });
 
       container.appendChild(card);
     });
