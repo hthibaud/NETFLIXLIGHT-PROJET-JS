@@ -28,39 +28,24 @@ const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch
 
 app.get('/api/movies', async (req, res) => {
     const page = req.query.page || 1;
-    const category = req.query.category || 'popular';
+    const category = req.query.category; 
+    const genre = req.query.genre;
     const language = 'fr-FR';
+    const apiKey = process.env.TMDB_TOKEN;
 
-    const moviesUrl = `https://api.themoviedb.org/3/movie/${category}?api_key=${process.env.TMDB_TOKEN}&language=${language}&page=${page}`;
-    const genresUrl = `https://api.themoviedb.org/3/genre/movie/list?api_key=${process.env.TMDB_TOKEN}&language=${language}`;
+    let url;
+    
+    if (genre) {
+        url = `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&language=${language}&page=${page}&with_genres=${genre}`;
+    } else {
+        url = `https://api.themoviedb.org/3/movie/${category}?api_key=${apiKey}&language=${language}&page=${page}`;
+    }
 
     try {
-        // fetch films + genres en parallèle
-        const [moviesRes, genresRes] = await Promise.all([
-            fetch(moviesUrl),
-            fetch(genresUrl)
-        ]);
-
-        const moviesData = await moviesRes.json();
-        const genresData = await genresRes.json();
-
-        // transformer les genres en map {id: name}
-        const genresMap = {};
-        genresData.genres.forEach(g => {
-            genresMap[g.id] = g.name;
-        });
-
-        // enrichir les films
-        const enrichedMovies = moviesData.results.map(movie => ({
-            ...movie,
-            genres: movie.genre_ids.map(id => ({
-                id,
-                name: genresMap[id] || 'Inconnu',
-                image: `https://image.tmdb.org/t/p/w200/${movie.poster_path}`
-            }))
-        }));
-
-        res.json(enrichedMovies);
+        const response = await fetch(url);
+        const data = await response.json();
+        res.json(data.results);
+   
 
     } catch (err) {
         res.status(500).json({ error: 'Impossible de récupérer les films' });
