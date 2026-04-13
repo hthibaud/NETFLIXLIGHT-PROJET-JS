@@ -8,7 +8,7 @@ async function fetchMovies() {
     const movies = await res.json();
 
     const moviesContainer = document.getElementById('movies');
-    moviesContainer.innerHTML = ''; // reset container
+    moviesContainer.innerHTML = '';
     console.log(movies);
 
     movies.forEach(movie => {
@@ -68,7 +68,7 @@ const pseudo = localStorage.getItem('userPseudo') || "Guest";
             welcomeMessage.textContent = `Nice to see you again, ${pseudo} !`;
         }
     } else {
-        // window.location.href = '/';
+        //window.location.href = '/';
     }
 
     const logoutBtn = document.getElementById('logoutBtn');
@@ -84,7 +84,6 @@ document.getElementById('avatarBtn').addEventListener('click', () => {
   window.location.href = '/profile'
 });
 
-// fetch initial
 fetchMovies();
 
 
