@@ -1,7 +1,7 @@
 let page = 1;
-let language = 'fr-FR';
+let language = "fr-FR";
 
-console.log("d:", document.getElementById('upcoming'));
+console.log("d:", document.getElementById("upcoming"));
 
 //Upcoming movies, Popular movies, Top rated movies API calls
 
@@ -11,12 +11,12 @@ async function fetchMovies(category, containerId) {
     const movies = await res.json();
 
     const container = document.getElementById(containerId);
-    container.innerHTML = '';
+    container.innerHTML = "";
 
-    movies.forEach(movie => {
-      const card = document.createElement('div');
+    movies.forEach((movie) => {
+      const card = document.createElement("div");
       card.className = `
-        min-w-[180px]
+        min-w-[250px]
         bg-slate-800 p-3 rounded-lg shadow-lg 
         flex flex-col items-center 
         hover:scale-105 transition transform
@@ -24,7 +24,7 @@ async function fetchMovies(category, containerId) {
 
       // image
       if (movie.poster_path) {
-        const img = document.createElement('img');
+        const img = document.createElement("img");
         img.src = `https://image.tmdb.org/t/p/w300${movie.poster_path}`;
         img.alt = movie.title;
         img.className = "rounded-lg shadow-md mb-2";
@@ -32,73 +32,62 @@ async function fetchMovies(category, containerId) {
       }
 
       // titre
-      const title = document.createElement('h3');
+      const title = document.createElement("h3");
       title.textContent = movie.title;
-      title.className = "font-dosis text-sm font-bold text-fuchsia-300 text-center";
+      title.className =
+        "font-dosis text-sm text-fuchsia-300 text-center";
       card.appendChild(title);
 
       container.appendChild(card);
     });
-
   } catch (err) {
     console.error(err);
   }
 }
 
-document.getElementById('avatarBtn').addEventListener('click', () => {
-  window.location.href = '/profile'
+document.getElementById("avatarBtn").addEventListener("click", () => {
+  window.location.href = "/profile";
 });
 
-fetchMovies('upcoming', 'upcoming');
-fetchMovies('popular', 'popular');
-fetchMovies('top_rated', 'top-rated');
-fetchMovies('now_playing', 'now_playing');
-
-
+fetchMovies("upcoming", "upcoming");
+fetchMovies("popular", "popular");
+fetchMovies("top_rated", "top-rated");
+fetchMovies("now_playing", "now_playing");
+fetchMoviesByGenre(28, "action"); // Action
+fetchMoviesByGenre(35, "comedy"); // Comedy
+fetchMoviesByGenre(18, "drama"); // Drama
 
 //Genres API call
 
 // FETCH MOVIES BY GENRE
 async function fetchMoviesByGenre(genreId, containerId) {
   try {
-    const res = await fetch(`/api/movies/genre?genre=${genreId}&page=${page}`);
+    const res = await fetch(`/api/movies?genre=${genreId}&page=${page}`);
     const movies = await res.json();
 
     const container = document.getElementById(containerId);
-    container.innerHTML = '';
+    if (!container) return; 
+    container.innerHTML = "";
 
-    movies.forEach(movie => {
-      const card = document.createElement('div');
-      card.className = `
-        min-w-[180px]
-        bg-slate-800 p-3 rounded-lg shadow-lg 
-        flex flex-col items-center 
-        hover:scale-105 transition transform
-      `;
+    movies.forEach((movie) => {
+      const card = document.createElement("div");
+      card.className = `min-w-[250px] bg-slate-800 p-3 rounded-lg shadow-lg flex flex-col items-center hover:scale-105 transition transform flex-shrink-0`;
 
-      // image
       if (movie.poster_path) {
-        const img = document.createElement('img');
+        const img = document.createElement("img");
         img.src = `https://image.tmdb.org/t/p/w300${movie.poster_path}`;
-        img.alt = movie.title;
         img.className = "rounded-lg shadow-md mb-2";
         card.appendChild(img);
       }
 
-      // titre
-      const title = document.createElement('h3');
+      const title = document.createElement("h3");
       title.textContent = movie.title;
-      title.className = "font-dosis text-sm font-bold text-fuchsia-300 text-center";
+      title.className = "font-dosis text-sm text-fuchsia-400 text-center whitespace-normal";
       card.appendChild(title);
 
       container.appendChild(card);
     });
-
   } catch (err) {
-    console.error(err);
+    console.error("Erreur genre:", err);
   }
 }
-
-fetchMoviesByGenre(28, 'action'); // Action
-fetchMoviesByGenre(35, 'comedy'); // Comedy
-fetchMoviesByGenre(18, 'drama');  // Drama
