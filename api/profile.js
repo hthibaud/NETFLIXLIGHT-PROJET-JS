@@ -7,12 +7,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const logoutBtn = document.getElementById('logoutBtn');
     const profileName = document.getElementById('profile-name');
     const profileMail = document.getElementById('profile-mail');
+    
 
 
     if (bannerPseudo) {
         bannerPseudo.textContent = `Your profile, ${pseudo}`;
-        profileName.textContent = `Your name : ${name}`;
-        profileMail.textContent = `Your mail : ${mail}`;
+        profileName.textContent = `${name}`;
+        profileMail.textContent = `${mail}`;
 
     }
 

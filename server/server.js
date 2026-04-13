@@ -92,7 +92,13 @@ app.post('/api/login', (req, res) => {
     // verifies if the password and the username are matching
     db.get(`SELECT * FROM users WHERE username = ? AND password = ?`, [username, password], (err, user) => {
         if (!user) return res.json({ success: false, message: "Wrong pseudo or password" });
-        res.json({ success: true, message: "Welcome " + user.username, username: user.username + "!"});
+        res.json({ 
+            success: true, 
+            message: "Welcome " + user.username + "!", 
+            name: user.name,
+            username: user.username,
+            mail: user.mail
+            });
     });
 });
 
