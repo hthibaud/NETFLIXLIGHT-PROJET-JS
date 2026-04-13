@@ -86,3 +86,10 @@ document.getElementById('avatarBtn').addEventListener('click', () => {
 
 // fetch initial
 fetchMovies();
+
+
+const moviesContainer = document.getElementById("movies");
+
+const searchInput = document.getElementById("searchInput");
+const searchBtn = document.getElementById("searchBtn");
+
