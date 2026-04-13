@@ -141,3 +141,5 @@ vite.config.ts.timestamp-*
 # ConventionalCommits
 settings.json 
 package-lock.json
+
+users.db
