@@ -12,7 +12,9 @@ const db = new sqlite3.Database('./users.db', (err) => {
         // creating the table if it does not exist yet (with username/password)
         db.run(`CREATE TABLE IF NOT EXISTS users (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
+            name TEXT UNIQUE NOT NULL,
             username TEXT UNIQUE NOT NULL,
+            mail TEXT UNIQUE NOT NULL,
             password TEXT NOT NULL
         )`);
     }
@@ -72,10 +74,10 @@ app.get('/index', (req, res) => {
 
 //Sign in for the users
 app.post('/api/register', (req, res) => {
-    const { username, password } = req.body;
+    const { name, username, mail, password } = req.body;
     // inserting in SQL
-    db.run(`INSERT INTO users (username, password) VALUES (?, ?)`, [username, password], function(err) {
-        if (err) return res.json({ success: false, message: "This pseudo already exists!" });
+    db.run(`INSERT INTO users (name, username, mail, password) VALUES (?, ?, ?, ?)`, [name, username, mail, password], function(err) {
+        if (err) return res.json({ success: false, message: "Pseudo, Name or Mail already used!" });
         res.json({ success: true, message: "Account created! log-in now!"});
     });
 });
@@ -90,7 +92,7 @@ app.post('/api/login', (req, res) => {
     // verifies if the password and the username are matching
     db.get(`SELECT * FROM users WHERE username = ? AND password = ?`, [username, password], (err, user) => {
         if (!user) return res.json({ success: false, message: "Wrong pseudo or password" });
-        res.json({ success: true, message: "Welcome " + user.username, username: user.username });
+        res.json({ success: true, message: "Welcome " + user.username, username: user.username + "!"});
     });
 });
 

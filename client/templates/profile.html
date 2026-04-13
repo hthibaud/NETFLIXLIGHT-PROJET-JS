@@ -29,7 +29,6 @@
 
 </head>
 
-<main>
 <body class="bg-slate-900 text-white">
 
   <header class="bg-indigo-950 p-10 text-fuchsia-400">
@@ -38,13 +37,20 @@
 
   </header>
 
-    <div class="mt-10 flex gap-4">
-    <button id="logoutBtn" class="bg-red-900 text-white px-4 py-2 rounded text-sm w-fit">
-      Logout
-    </button>
-    </div>
+  <div class="flex-grow p-4">
+<h1 id="profile-name" class = "font-dosis text-fuchsia-450"> 
+</h1>
+<h1 id="profile-mail" class = "font-dosis text-fuchsia-450">
+</h1>
+  </div>
+  
+  <div class="mt-auto flex justify-between items-end px-10 pb-4 w-full">
+    <div></div>
+    <button id="logoutBtn" class="bg-red-900 text-white px-4 py-2 rounded text-sm w-fit">Logout</button>
+  </div>
 
-  </main>
+
+
 
 
   <script type="module" src="../../api/profile.js"></script>
