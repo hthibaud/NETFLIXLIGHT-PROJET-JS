@@ -50,7 +50,7 @@ async function fetchMovies(searchQuery = '') {
       // title
       const title = document.createElement('h3');
       title.textContent = movie.title;
-      title.className = "font-dosis text-xl font-bold text-fuchsia-300 text-center mb-2";
+      title.className = "font-dosis text-xl text-fuchsia-300 text-center mb-2";
       card.appendChild(title);
 
       // release date
@@ -89,8 +89,8 @@ async function fetchMovies(searchQuery = '') {
       const moviesContainer = document.getElementById('movies');
       moviesContainer.innerHTML = '';
       if (searchQuery) {
-        setPageTitle(`Résultats pour : ${searchQuery}`);
-        console.log('Recherche:', searchQuery, movies);
+        setPageTitle(`Results for : ${searchQuery}`);
+        console.log('Search:', searchQuery, movies);
       } else {
         setPageTitle('All movies');
       }
@@ -98,7 +98,7 @@ async function fetchMovies(searchQuery = '') {
       if (!movies || movies.length === 0) {
         const message = document.createElement('p');
         message.className = "font-dosis text-lg text-white text-center col-span-full";
-        message.textContent = searchQuery ? `Aucun film trouvé pour « ${searchQuery} »` : 'Aucun film disponible.';
+        message.textContent = searchQuery ? `No movie found for « ${searchQuery} »` : 'Aucun film disponible.';
         moviesContainer.appendChild(message);
         return;
       }
@@ -120,7 +120,7 @@ async function fetchMovies(searchQuery = '') {
         //title
         const title = document.createElement('h3');
         title.textContent = movie.title;
-        title.className = "font-dosis text-xl font-bold text-fuchsia-300 text-center";
+        title.className = "font-dosis text-xl text-fuchsia-300 text-center";
         card.appendChild(title);
 
         card.addEventListener('click', () => {

@@ -24,6 +24,7 @@ const db = new sqlite3.Database("./users.db", (err) => {
             movie_id INTEGER,
             movie_title TEXT,
             movie_poster TEXT,
+            UNIQUE(user_id, movie_id),
             FOREIGN KEY(user_id) REFERENCES users(id)
         )`);
 
@@ -33,6 +34,7 @@ const db = new sqlite3.Database("./users.db", (err) => {
             movie_id INTEGER,
             movie_title TEXT,
             movie_poster TEXT,
+            UNIQUE(user_id, movie_id),
             FOREIGN KEY(user_id) REFERENCES users(id)
         )`);
   }
@@ -71,25 +73,25 @@ app.get("/api/movies", async (req, res) => {
   }
 });
 
-app.get('/api/search', async (req, res) => {
-    const query = req.query.query || '';
-    const page = req.query.page || 1;
-    const language = 'fr-FR';
-    const apiKey = process.env.TMDB_TOKEN;
+app.get("/api/search", async (req, res) => {
+  const query = req.query.query || "";
+  const page = req.query.page || 1;
+  const language = "fr-FR";
+  const apiKey = process.env.TMDB_TOKEN;
 
-    if (!query) {
-        return res.status(400).json({ error: 'Query vide' });
-    }
+  if (!query) {
+    return res.status(400).json({ error: "Query vide" });
+  }
 
-    const searchUrl = `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&language=${language}&query=${encodeURIComponent(query)}&page=${page}`;
+  const searchUrl = `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&language=${language}&query=${encodeURIComponent(query)}&page=${page}`;
 
-    try {
-        const response = await fetch(searchUrl);
-        const data = await response.json();
-        res.json(data.results);
-    } catch (err) {
-        res.status(500).json({ error: 'Impossible de rechercher les films' });
-    }
+  try {
+    const response = await fetch(searchUrl);
+    const data = await response.json();
+    res.json(data.results);
+  } catch (err) {
+    res.status(500).json({ error: "Impossible de rechercher les films" });
+  }
 });
 
 // API route for single movie
@@ -121,27 +123,49 @@ app.get("/api/movies/genre", async (req, res) => {
     const data = await response.json();
     res.json(data.results);
   } catch (err) {
-    res
-      .status(500)
-      .json({ error: "Impossible de récupérer les films par genre" });
+    res.status(500).json({ error: "Can't fetch films by genre." });
   }
 });
 
-// Ajouter un film aux favoris
+// add film to favorites
 app.post("/api/favorites/add", (req, res) => {
   const { username, movie_id, title, poster } = req.body;
 
-  // On cherche d'abord l'ID de l'utilisateur via son username
   db.get("SELECT id FROM users WHERE username = ?", [username], (err, user) => {
-    if (!user) return res.json({ success: false });
+    if (!user) return res.json({ success: false, message: "User not found" });
+
+    db.get("SELECT * FROM favorites WHERE user_id = ? AND movie_id = ?", [user.id, movie_id], (err, row) => {
+      if (row) {
+        return res.json({ success: false, message: "This movie is already in your favorites!" });
+      }
+
+      db.run(
+        "INSERT INTO favorites (user_id, movie_id, movie_title, movie_poster) VALUES (?, ?, ?, ?)",
+        [user.id, movie_id, title, poster],
+        (err) => {
+          if (err) return res.json({ success: false, message: "Database error" });
+          res.json({ success: true, message: "Added to favorites!" });
+        }
+      );
+    });
+  });
+});
+
+// remove a film from favorites
+app.post("/api/favorites/remove", (req, res) => {
+  const { username, movie_id, title, poster } = req.body;
+
+  db.get("SELECT id FROM users WHERE username = ?", [username], (err, user) => {
+    if (!user) return res.json({ success: false, message: "User not found" });
 
     db.run(
-      "INSERT INTO favorites (user_id, movie_id, movie_title, movie_poster) VALUES (?, ?, ?, ?)",
-      [user.id, movie_id, title, poster],
-      (err) => {
-        if (err) return res.json({ success: false });
-        res.json({ success: true, message: "Ajouté aux favoris !" });
-      },
+      "DELETE FROM favorites WHERE user_id = ? AND movie_id = ?",
+      [user.id, movie_id],
+      function (err) {
+        if (err) return res.json({ success: false, message: "Database error" });
+        
+        res.json({ success: true, message: "Removed from favorites!" });
+      }
     );
   });
 });
@@ -162,6 +186,49 @@ app.get("/api/favorites/:username", (req, res) => {
   );
 });
 
+// add a film to watchlist
+app.post("/api/watchlist/add", (req, res) => {
+  const { username, movie_id, title, poster } = req.body;
+
+  db.get("SELECT id FROM users WHERE username = ?", [username], (err, user) => {
+    if (!user) return res.json({ success: false, message: "User not found" });
+
+    db.get("SELECT * FROM watchlist WHERE user_id = ? AND movie_id = ?", [user.id, movie_id], (err, row) => {
+      if (row) {
+        return res.json({ success: false, message: "This movie is already in your watchlist!" });
+      }
+
+      db.run(
+        "INSERT INTO watchlist (user_id, movie_id, movie_title, movie_poster) VALUES (?, ?, ?, ?)",
+        [user.id, movie_id, title, poster],
+        (err) => {
+          if (err) return res.json({ success: false, message: "Database error" });
+          res.json({ success: true, message: "Added to watchlist!" });
+        }
+      );
+    });
+  });
+});
+
+// remove a film from watchlist
+app.post("/api/watchlist/remove", (req, res) => {
+  const { username, movie_id, title, poster } = req.body;
+
+  db.get("SELECT id FROM users WHERE username = ?", [username], (err, user) => {
+    if (!user) return res.json({ success: false, message: "User not found" });
+
+    db.run(
+      "DELETE FROM watchlist WHERE user_id = ? AND movie_id = ?",
+      [user.id, movie_id],
+      function (err) {
+        if (err) return res.json({ success: false, message: "Database error" });
+
+        res.json({ success: true, message: "Removed from watchlist!" });
+      }
+    );
+  });
+});
+
 // get user's watchlist
 app.get("/api/watchlist/:username", (req, res) => {
   const username = req.params.username;
@@ -172,8 +239,8 @@ app.get("/api/watchlist/:username", (req, res) => {
     [username],
     (err, rows) => {
       if (err) return res.status(500).json([]);
-      res.json(rows); 
-    }
+      res.json(rows);
+    },
   );
 });
 
