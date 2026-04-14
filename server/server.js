@@ -54,6 +54,27 @@ app.get('/api/movies', async (req, res) => {
     }
 });
 
+app.get('/api/search', async (req, res) => {
+    const query = req.query.query || '';
+    const page = req.query.page || 1;
+    const language = 'fr-FR';
+    const apiKey = process.env.TMDB_TOKEN;
+
+    if (!query) {
+        return res.status(400).json({ error: 'Query vide' });
+    }
+
+    const searchUrl = `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&language=${language}&query=${encodeURIComponent(query)}&page=${page}`;
+
+    try {
+        const response = await fetch(searchUrl);
+        const data = await response.json();
+        res.json(data.results);
+    } catch (err) {
+        res.status(500).json({ error: 'Impossible de rechercher les films' });
+    }
+});
+
 // API route for single movie
 app.get('/api/movie/:id', async (req, res) => {
     const id = req.params.id;
@@ -112,10 +133,6 @@ app.get('/account_creation', (req, res) => {
 
 app.get('/carroussel', (req, res) => {
     res.sendFile(path.join(__dirname, '../client/templates/carroussel.html'));
-});
-
-app.get('/movie_details', (req, res) => {
-    res.sendFile(path.join(__dirname, '../client/templates/movie_details.html'));
 });
 
 app.get('/index', (req, res) => {

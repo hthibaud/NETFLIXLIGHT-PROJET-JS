@@ -1,14 +1,27 @@
 let page = 1;
 let sort = 'popularity.desc';
 let language = 'fr-FR';
+let currentSearch = '';
 
 const urlParams = new URLSearchParams(window.location.search);
 const movieId = urlParams.get('id');
 
-async function fetchMovies() {
+function toggleSearchAndPagination(visible) {
+  const ids = ['searchInput', 'searchBtn', 'prev-top', 'next-top', 'prev-bottom', 'next-bottom'];
+  ids.forEach(id => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.style.display = visible ? '' : 'none';
+    }
+  });
+}
+
+async function fetchMovies(searchQuery = '') {
+  currentSearch = searchQuery;
   try {
     let res;
     if (movieId) {
+      toggleSearchAndPagination(false);
       res = await fetch(`/api/movie/${movieId}`);
       const movie = await res.json();
       const moviesContainer = document.getElementById('movies');
@@ -22,7 +35,7 @@ async function fetchMovies() {
         const img = document.createElement('img');
         img.src = `https://image.tmdb.org/t/p/w300${movie.poster_path}`;
         img.alt = movie.title;
-        img.className = "rounded-lg shadow-md mb-4"; // cadre et ombre
+        img.className = "rounded-lg shadow-md mb-4";
         card.appendChild(img);
       }
 
@@ -58,31 +71,49 @@ async function fetchMovies() {
 
       moviesContainer.appendChild(card);
     } else {
-      res = await fetch(`/api/movies?page=${page}`);
+      if (searchQuery) {
+        res = await fetch(`/api/search?query=${encodeURIComponent(searchQuery)}&page=${page}`);
+      } else {
+        res = await fetch(`/api/movies?page=${page}`);
+      }
       const movies = await res.json();
 
       const moviesContainer = document.getElementById('movies');
       moviesContainer.innerHTML = '';
-      console.log(movies);
+      if (searchQuery) {
+        console.log('Recherche:', searchQuery, movies);
+      }
+
+      if (!movies || movies.length === 0) {
+        const message = document.createElement('p');
+        message.className = "font-dosis text-lg text-white text-center col-span-full";
+        message.textContent = searchQuery ? `Aucun film trouvé pour « ${searchQuery} »` : 'Aucun film disponible.';
+        moviesContainer.appendChild(message);
+        return;
+      }
 
       movies.forEach(movie => {
         const card = document.createElement('div');
-        card.className = "bg-slate-800 p-4 rounded-lg shadow-lg flex flex-col items-center hover:scale-105 transition transform";
+        card.className = "bg-slate-800 p-4 rounded-lg shadow-lg flex flex-col items-center hover:scale-105 transition transform cursor-pointer";
+        card.style.cursor = 'pointer';
 
         // image
         if (movie.poster_path) {
           const img = document.createElement('img');
           img.src = `https://image.tmdb.org/t/p/w300${movie.poster_path}`;
           img.alt = movie.title;
-          img.className = "rounded-lg shadow-md mb-4"; // cadre et ombre
+          img.className = "rounded-lg shadow-md mb-4";
           card.appendChild(img);
         }
 
-        // titre
         const title = document.createElement('h3');
         title.textContent = movie.title;
         title.className = "font-dosis text-xl font-bold text-fuchsia-300 text-center";
         card.appendChild(title);
+
+        card.addEventListener('click', () => {
+          window.location.href = `${window.location.pathname}?id=${movie.id}`;
+        });
 
         moviesContainer.appendChild(card);
       });
@@ -93,27 +124,42 @@ async function fetchMovies() {
 }
 
 // pagination
-document.getElementById('prev-top').addEventListener('click', () => {
-  if (page > 1) {
-    page--;
-    fetchMovies();
-  }
-});
-document.getElementById('next-top').addEventListener('click', () => {
-  page++;
-  fetchMovies();
-});
+const prevTop = document.getElementById('prev-top');
+const nextTop = document.getElementById('next-top');
+const prevBottom = document.getElementById('prev-bottom');
+const nextBottom = document.getElementById('next-bottom');
 
-document.getElementById('prev-bottom').addEventListener('click', () => {
-  if (page > 1) {
-    page--;
-    fetchMovies();
-  }
-});
-document.getElementById('next-bottom').addEventListener('click', () => {
-  page++;
-  fetchMovies();
-});
+if (prevTop) {
+  prevTop.addEventListener('click', () => {
+    if (page > 1) {
+      page--;
+      fetchMovies(currentSearch);
+    }
+  });
+}
+
+if (nextTop) {
+  nextTop.addEventListener('click', () => {
+    page++;
+    fetchMovies(currentSearch);
+  });
+}
+
+if (prevBottom) {
+  prevBottom.addEventListener('click', () => {
+    if (page > 1) {
+      page--;
+      fetchMovies(currentSearch);
+    }
+  });
+}
+
+if (nextBottom) {
+  nextBottom.addEventListener('click', () => {
+    page++;
+    fetchMovies(currentSearch);
+  });
+}
 
 document.addEventListener('DOMContentLoaded', () => {
 const pseudo = localStorage.getItem('userPseudo') || "Guest";    
@@ -135,24 +181,84 @@ const pseudo = localStorage.getItem('userPseudo') || "Guest";
     }
 
     if (movieId) {
-      document.getElementById('prev-top').style.display = 'none';
-      document.getElementById('next-top').style.display = 'none';
-      document.getElementById('prev-bottom').style.display = 'none';
-      document.getElementById('next-bottom').style.display = 'none';
-      document.getElementById('searchInput').style.display = 'none';
-      document.getElementById('searchBtn').style.display = 'none';
+      const backBtn = document.getElementById('backBtn');
+      if (backBtn) {
+        backBtn.addEventListener('click', () => {
+          window.location.href = '/allmovies';
+        });
+      }
     }
 });
 
-document.getElementById('avatarBtn').addEventListener('click', () => {
-  window.location.href = '/profile'
-});
+const avatarBtn = document.getElementById('avatarBtn');
+if (avatarBtn) {
+  avatarBtn.addEventListener('click', () => {
+    window.location.href = '/profile';
+  });
+}
 
-fetchMovies();
+// Ensure DOM is ready before fetching movies
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', () => {
+    const moviesContainer = document.getElementById("movies");
+    const searchInput = document.getElementById("searchInput");
+    const searchBtn = document.getElementById("searchBtn");
 
+    if (searchInput && searchBtn) {
+      searchBtn.addEventListener('click', () => {
+        const query = searchInput.value.trim();
+        if (!query) {
+          page = 1;
+          fetchMovies();
+          return;
+        }
+        page = 1;
+        fetchMovies(query);
+      });
 
-const moviesContainer = document.getElementById("movies");
+      searchInput.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter') {
+          event.preventDefault();
+          searchBtn.click();
+        }
+      });
+    }
 
-const searchInput = document.getElementById("searchInput");
-const searchBtn = document.getElementById("searchBtn");
+    if (movieId) {
+      toggleSearchAndPagination(false);
+    }
+
+    fetchMovies();
+  });
+} else {
+  const moviesContainer = document.getElementById("movies");
+  const searchInput = document.getElementById("searchInput");
+  const searchBtn = document.getElementById("searchBtn");
+
+  if (searchInput && searchBtn) {
+    searchBtn.addEventListener('click', () => {
+      const query = searchInput.value.trim();
+      if (!query) {
+        page = 1;
+        fetchMovies();
+        return;
+      }
+      page = 1;
+      fetchMovies(query);
+    });
+
+    searchInput.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter') {
+        event.preventDefault();
+        searchBtn.click();
+      }
+    });
+  }
+
+  if (movieId) {
+    toggleSearchAndPagination(false);
+  }
+
+  fetchMovies();
+}
 

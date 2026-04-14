@@ -40,7 +40,7 @@ async function fetchMovies(category, containerId) {
       card.appendChild(title);
 
       card.addEventListener('click', () => {
-        window.location.href = `/movie_details?id=${movie.id}`;
+        window.location.href = `/allmovies?id=${movie.id}`;
       });
 
       container.appendChild(card);
@@ -99,7 +99,7 @@ async function fetchMoviesByGenre(genreId, containerId) {
       card.appendChild(title);
 
       card.addEventListener('click', () => {
-        window.location.href = `/movie_details?id=${movie.id}`;
+        window.location.href = `/allmovies?id=${movie.id}`;
       });
 
       container.appendChild(card);
