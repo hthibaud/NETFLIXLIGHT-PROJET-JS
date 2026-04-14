@@ -40,24 +40,30 @@
         <h1 class="font-sekuya text-left text-7xl font-bold">FLIXPORK</h1>
       <h6 class="font-dosis text-left text-4xl">Our movies</h6>
 
-      <div class = "absolute bottom-4 right-10 flex items-center gap-4">
+<div class="absolute bottom-5 right-5 flex items-center gap-6">
+        
+        <button id="favBtn" 
+                class="font-dosis text-fuchsia-400 text-lg hover:text-white transition-colors uppercase cursor-pointer">
+            Favorites
+        </button>
 
-        <h6 class = "font-dosis text-fuchsia-400" >
-        Your profile
-      </h6>
+        <button id="watchlistBtn" 
+                class="font-dosis text-fuchsia-400 text-lg hover:text-white transition-colors uppercase cursor-pointer">
+            Watchlist
+        </button>
 
-  <button id="avatarBtn" 
+          <button id="avatarBtn" 
             class="w-12 h-12 rounded-full border-2 border-fuchsia-500 
                    overflow-hidden shadow-lg hover:scale-110 
                    hover:border-fuchsia-300 transition-all duration-300">
       
-      <img src="/static/img/logo-f-purple.png" 
+      <img src="/static/img/icon-persona.png" 
            alt="User Avatar" 
            class="w-full h-full object-cover">
            
     </button>
-
 </div>
+
 
     </header>
 
@@ -111,12 +117,12 @@
         Your profile
       </h6>
 
-  <button id="avatarBtn" 
+  <button id="avatar2Btn" 
             class="w-12 h-12 rounded-full border-2 border-fuchsia-500 
                    overflow-hidden shadow-lg hover:scale-110 
                    hover:border-fuchsia-300 transition-all duration-300">
       
-      <img src="/static/img/logo-f-purple.png" 
+      <img src="/static/img/icon-persona.png" 
            alt="User Avatar" 
            class="w-full h-full object-cover">
            
@@ -146,6 +152,8 @@
   }
 </style>
 
-  <script type="module" src="/api/carroussel.js"></script>
+  <script type="module" src="../../api/carroussel.js"></script>
+  <script type="module" src="../../api/profile.js"></script>
+
 </body>
 </html>
