@@ -15,7 +15,7 @@ async function fetchMovies(category, containerId) {
     movies.forEach((movie) => {
       const card = document.createElement("div");
       card.className =
-        "min-w-[300px] relative group bg-slate-800 p-3 rounded-lg shadow-lg flex flex-col items-center hover:scale-105 transition transform flex-shrink-0 cursor-pointer";
+        "w-[300px] relative group bg-slate-800 p-3 rounded-lg shadow-lg flex flex-col items-center hover:scale-105 transition transform flex-shrink-0 cursor-pointer";
 
       const imgContainer = document.createElement("div");
       imgContainer.className = "relative w-full";
