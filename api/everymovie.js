@@ -16,6 +16,13 @@ function toggleSearchAndPagination(visible) {
   });
 }
 
+function setPageTitle(title) {
+  const titleEl = document.getElementById('pageTitle');
+  if (titleEl) {
+    titleEl.textContent = title;
+  }
+}
+
 async function fetchMovies(searchQuery = '') {
   currentSearch = searchQuery;
   try {
@@ -24,6 +31,7 @@ async function fetchMovies(searchQuery = '') {
       toggleSearchAndPagination(false);
       res = await fetch(`/api/movie/${movieId}`);
       const movie = await res.json();
+      setPageTitle(movie.title || 'Détails du film');
       const moviesContainer = document.getElementById('movies');
       moviesContainer.innerHTML = '';
 
@@ -81,7 +89,10 @@ async function fetchMovies(searchQuery = '') {
       const moviesContainer = document.getElementById('movies');
       moviesContainer.innerHTML = '';
       if (searchQuery) {
+        setPageTitle(`Résultats pour : ${searchQuery}`);
         console.log('Recherche:', searchQuery, movies);
+      } else {
+        setPageTitle('Tous les films');
       }
 
       if (!movies || movies.length === 0) {
