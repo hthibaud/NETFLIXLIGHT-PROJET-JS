@@ -144,7 +144,7 @@ app.post("/api/favorites/add", (req, res) => {
         [user.id, movie_id, title, poster],
         (err) => {
           if (err) return res.json({ success: false, message: "Database error" });
-          res.json({ success: true, message: "Added to favorites!" });
+          res.json({ success: true, message: "added to favorites!" });
         }
       );
     });
@@ -203,7 +203,7 @@ app.post("/api/watchlist/add", (req, res) => {
         [user.id, movie_id, title, poster],
         (err) => {
           if (err) return res.json({ success: false, message: "Database error" });
-          res.json({ success: true, message: "Added to watchlist!" });
+          res.json({ success: true, message: "added to your watchlist!" });
         }
       );
     });

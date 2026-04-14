@@ -1,119 +1,162 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dosis:wght@200..800&display=swap">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sekuya&display=swap">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <style>
-    .font-dosis {
-      font-family: 'Dosis', sans-serif;
-    }
-    .font-sekuya {
-        font-family: 'Sekuya', sans-serif;
-    }
-</style>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Dosis:wght@200..800&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Sekuya&display=swap"
+    />
 
+    <style>
+      .font-dosis {
+        font-family: "Dosis", sans-serif;
+      }
+      .font-sekuya {
+        font-family: "Sekuya", sans-serif;
+      }
+    </style>
 
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
 
-  <script src="https://cdn.tailwindcss.com"></script>
+    <title>All movies</title>
 
-  <title>All movies</title>
+    <link rel="icon" type="image/png" href="../static/img/logo-f-purple.png" />
+    <link
+      rel="image"
+      type="image/jpg"
+      href="../static/img/blurred_movies.jpg"
+    />
+  </head>
 
-  <link rel="icon" type="image/png" href="../static/img/logo-f-purple.png">
-  <link rel="image" type="image/jpg" href="../static/img/blurred_movies.jpg">
+  <body class="bg-slate-900 text-white">
+    <header class="bg-indigo-950 p-10 text-fuchsia-400 relative">
+      <h1 id="pageTitle" class="font-sekuya text-7xl font-bold">All movies</h1>
+      <h6 class="font-sekuya text-2xl">FLIXPORK</h6>
 
-</head>
+      <div class="absolute bottom-5 right-5 flex items-center gap-6">
+        <a
+          href="/carroussel"
+          class="font-dosis text-fuchsia-400 text-lg hover:text-white transition-colors uppercase cursor-pointer"
+        >
+          Home
+        </a>
 
+        <a
+          href="/allmovies"
+          class="font-dosis text-fuchsia-400 text-lg hover:text-white transition-colors uppercase cursor-pointer"
+        >
+          Search
+        </a>
 
-<body class="bg-slate-900 text-white">
+        <button
+          id="favBtn"
+          class="font-dosis text-fuchsia-400 text-lg hover:text-white transition-colors uppercase cursor-pointer"
+        >
+          Favorites
+        </button>
 
-  <header class="bg-indigo-950 p-10 text-fuchsia-400 relative">
-    <h1 id="pageTitle" class="font-sekuya text-7xl font-bold">All movies</h1>
-    <h6 class="font-sekuya text-2xl">FLIXPORK</h6>
-<div class = "absolute bottom-4 right-10 flex items-center gap-4">
+        <button
+          id="watchlistBtn"
+          class="font-dosis text-fuchsia-400 text-lg hover:text-white transition-colors uppercase cursor-pointer"
+        >
+          Watchlist
+        </button>
 
-        <h6 class = "font-dosis text-fuchsia-400" >
-        Your profile
-      </h6>
+        <button
+          id="avatarBtn"
+          class="w-12 h-12 rounded-full border-2 border-fuchsia-500 overflow-hidden shadow-lg hover:scale-110 hover:border-fuchsia-300 transition-all duration-300"
+        >
+          <img
+            src="/static/img/icon-persona.png"
+            alt="User Avatar"
+            class="w-full h-full object-cover"
+          />
+        </button>
+      </div>
+    </header>
 
-  <button id="avatarBtn" 
-            class="w-12 h-12 rounded-full border-2 border-fuchsia-500 
-                   overflow-hidden shadow-lg hover:scale-110 
-                   hover:border-fuchsia-300 transition-all duration-300">
-      
-      <img src="/static/img/icon-persona.png" 
-           alt="User Avatar" 
-           class="w-full h-full object-cover">
+    <main class="p-10">
+      <div class="mt-6 flex gap-4 items-center">
+        <input
+          id="searchInput"
+          type="text"
+          placeholder="Search a movie..."
+          class="px-4 py-2 rounded bg-slate-800 border border-fuchsia-500 focus:outline-none focus:ring-2 focus:ring-fuchsia-400 w-full"
+        />
 
+        <button
+          id="searchBtn"
+          class="bg-fuchsia-500 px-4 py-2 rounded hover:bg-fuchsia-500 transition"
+        >
+          Search
+        </button>
+      </div>
 
-           
-    </button>
+      <div class="mt-10 flex gap-4">
+        <button
+          id="prev-top"
+          class="bg-indigo-950 px-4 py-2 rounded hover:bg-indigo-700 transition"
+        >
+          Previous
+        </button>
+        <button
+          id="next-top"
+          class="bg-indigo-950 px-4 py-2 rounded hover:bg-indigo-700 transition"
+        >
+          Next
+        </button>
+      </div>
 
-</div>
-  </header>
+      <div
+        id="movies"
+        class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"
+      ></div>
 
-  
-  <main class="p-10">
+      <div class="mt-10 flex gap-4">
+        <button
+          id="prev-bottom"
+          class="bg-indigo-950 px-4 py-2 rounded hover:bg-indigo-700 transition"
+        >
+          Previous
+        </button>
+        <button
+          id="next-bottom"
+          class="bg-indigo-950 px-4 py-2 rounded hover:bg-indigo-700 transition"
+        >
+          Next
+        </button>
+      </div>
+    </main>
 
-    <div class="mt-6 flex gap-4 items-center">
-      <input 
-        id="searchInput"
-        type="text" 
-        placeholder="Search a movie..."
-        class="px-4 py-2 rounded bg-slate-800 border border-fuchsia-500 focus:outline-none focus:ring-2 focus:ring-fuchsia-400 w-full"
-      >
+    <footer class="bg-indigo-950 p-10 text-fuchsia-400 relative">
+      <h1 class="font-sekuya text-left text-7xl font-bold">FLIXPORK</h1>
 
-      <button 
-        id="searchBtn"
-        class="bg-fuchsia-500 px-4 py-2 rounded hover:bg-fuchsia-500 transition">
-        Search
-      </button>
-    </div>
+      <div class="absolute bottom-4 right-10 flex items-center gap-4">
+        <h6 class="font-dosis text-fuchsia-400">Your profile</h6>
 
-    <div class="mt-10 flex gap-4">
-      <button id="prev-top" class="bg-indigo-950 px-4 py-2 rounded hover:bg-indigo-700 transition">Previous</button>
-      <button id="next-top" class="bg-indigo-950 px-4 py-2 rounded hover:bg-indigo-700 transition">Next</button>
-    </div>
+        <button
+          id="avatar2Btn"
+          class="w-12 h-12 rounded-full border-2 border-fuchsia-500 overflow-hidden shadow-lg hover:scale-110 hover:border-fuchsia-300 transition-all duration-300"
+        >
+          <img
+            src="/static/img/icon-persona.png"
+            alt="User Avatar"
+            class="w-full h-full object-cover"
+          />
+        </button>
+      </div>
+    </footer>
 
-    <div id="movies" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"></div>
-
-    <div class="mt-10 flex gap-4">
-      <button id="prev-bottom" class="bg-indigo-950 px-4 py-2 rounded hover:bg-indigo-700 transition">Previous</button>
-      <button id="next-bottom" class="bg-indigo-950 px-4 py-2 rounded hover:bg-indigo-700 transition">Next</button>
-    </div>
-
-  </main>
-
-        <footer class="bg-indigo-950 p-10 text-fuchsia-400 relative">
-
-        <h1 class="font-sekuya text-left text-7xl font-bold">FLIXPORK</h1>
-
-      <div class = "absolute bottom-4 right-10 flex items-center gap-4">
-
-        <h6 class = "font-dosis text-fuchsia-400" >
-        Your profile
-      </h6>
-
-  <button id="avatar2Btn" 
-            class="w-12 h-12 rounded-full border-2 border-fuchsia-500 
-                   overflow-hidden shadow-lg hover:scale-110 
-                   hover:border-fuchsia-300 transition-all duration-300">
-      
-      <img src="/static/img/icon-persona.png" 
-           alt="User Avatar" 
-           class="w-full h-full object-cover">
-           
-    </button>
-
-</div>
-
-</footer>
-
-  <script type="module" src="/api/everymovie.js"></script>
-</body>
+    <script type="module" src="/api/everymovie.js"></script>
+    <script type="module" src="/api/profile.js"></script>
+  </body>
 </html>

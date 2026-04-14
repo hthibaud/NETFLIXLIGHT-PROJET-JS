@@ -32,13 +32,15 @@ async function fetchMovies(category, containerId) {
         "absolute top-2 right-2 flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20";
 
       overlay.innerHTML = `
-    <button type="button" class="bg-black/60 p-2 rounded-full hover:bg-fuchsia-500 transition-colors text-white text-xl" title="Add to Favorites">
-      ⭐
+    <button class="fav-btn bg-black/60 p-2 rounded-full hover:bg-fuchsia-600 text-white transition-colors" title="Add to Favorites">
+      <i data-lucide="star" class="w-5 h-5"></i>
     </button>
-    <button type="button" class="bg-black/60 p-2 rounded-full hover:bg-fuchsia-500 transition-colors text-white text-xl" title="Add to Watchlist">
-      🔖
+    <button class="watch-btn bg-black/60 p-2 rounded-full hover:bg-fuchsia-600 text-white transition-colors" title="Add to Watchlist">
+      <i data-lucide="bookmark" class="w-5 h-5"></i>
     </button>
-  `;
+`;
+
+      lucide.createIcons();
 
       imgContainer.appendChild(overlay);
       card.appendChild(imgContainer);
@@ -125,13 +127,15 @@ async function fetchMoviesByGenre(genreId, containerId) {
         "absolute top-2 right-2 flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300";
 
       overlay.innerHTML = `
-    <button class="bg-black/40 p-2 rounded-full hover:bg-fuchsia-500 transition-colors text-white text-xl"title="Add to Favorites">
-      ⭐
+    <button class="fav-btn bg-black/60 p-2 rounded-full hover:bg-fuchsia-600 text-white transition-colors" title="Add to Favorites">
+      <i data-lucide="star" class="w-5 h-5"></i>
     </button>
-    <button class="bg-black/40 p-2 rounded-full hover:bg-fuchsia-500 transition-colors text-white text-xl"title="Add to Watchlist">
-      🔖
+    <button class="watch-btn bg-black/60 p-2 rounded-full hover:bg-fuchsia-600 text-white transition-colors" title="Add to Watchlist">
+      <i data-lucide="bookmark" class="w-5 h-5"></i>
     </button>
-  `;
+`;
+
+      lucide.createIcons();
 
       imgContainer.appendChild(overlay);
       card.appendChild(imgContainer);
@@ -164,6 +168,17 @@ async function fetchMoviesByGenre(genreId, containerId) {
   } catch (err) {
     console.error("Erreur genre:", err);
   }
+}
+
+const favBtn = document.getElementById("fav-detail-btn");
+const watchBtn = document.getElementById("watch-detail-btn");
+
+if (favBtn) {
+  favBtn.addEventListener("click", () => addToCollection("favorites", movie));
+}
+
+if (watchBtn) {
+  watchBtn.addEventListener("click", () => addToCollection("watchlist", movie));
 }
 
 async function addToCollection(type, movie) {
