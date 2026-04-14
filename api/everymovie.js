@@ -1,6 +1,6 @@
 let page = 1;
 let sort = 'popularity.desc';
-let language = 'fr-FR';
+let language = 'en-US';
 let currentSearch = '';
 
 const urlParams = new URLSearchParams(window.location.search);
@@ -47,7 +47,7 @@ async function fetchMovies(searchQuery = '') {
         card.appendChild(img);
       }
 
-      // titre
+      // title
       const title = document.createElement('h3');
       title.textContent = movie.title;
       title.className = "font-dosis text-xl font-bold text-fuchsia-300 text-center mb-2";
@@ -116,7 +116,8 @@ async function fetchMovies(searchQuery = '') {
           img.className = "rounded-lg shadow-md mb-4";
           card.appendChild(img);
         }
-
+        
+        //title
         const title = document.createElement('h3');
         title.textContent = movie.title;
         title.className = "font-dosis text-xl font-bold text-fuchsia-300 text-center";
