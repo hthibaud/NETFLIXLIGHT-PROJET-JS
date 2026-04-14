@@ -36,47 +36,112 @@ async function fetchMovies(searchQuery = '') {
       moviesContainer.innerHTML = '';
 
       const card = document.createElement('div');
-      card.className = "bg-slate-800 p-4 rounded-lg shadow-lg flex flex-col items-center hover:scale-105 transition transform max-w-md mx-auto";
+      card.className = "bg-slate-800 p-6 rounded-lg shadow-lg flex gap-8 max-w-6xl mx-auto";
 
-      // image
+      // Image column
+      const imageCol = document.createElement('div');
+      imageCol.className = "flex-shrink-0";
+
       if (movie.poster_path) {
         const img = document.createElement('img');
         img.src = `https://image.tmdb.org/t/p/w300${movie.poster_path}`;
         img.alt = movie.title;
-        img.className = "rounded-lg shadow-md mb-4";
-        card.appendChild(img);
+        img.className = "rounded-lg shadow-md w-64 h-96 object-cover";
+        imageCol.appendChild(img);
       }
 
-      // title
+      card.appendChild(imageCol);
+
+      // Details column
+      const detailsCol = document.createElement('div');
+      detailsCol.className = "flex-1 flex flex-col gap-5";
+
+      // Section: Title
+      const titleSection = document.createElement('div');
+      titleSection.className = "bg-slate-700 p-4 rounded-lg";
       const title = document.createElement('h3');
       title.textContent = movie.title;
-      title.className = "font-dosis text-xl font-bold text-fuchsia-300 text-center mb-2";
-      card.appendChild(title);
+      title.className = "font-dosis text-3xl font-bold text-fuchsia-300";
+      titleSection.appendChild(title);
+      detailsCol.appendChild(titleSection);
 
-      // release date
+      // Section: Info (Release date + Genres)
+      const infoSection = document.createElement('div');
+      infoSection.className = "bg-slate-700 p-4 rounded-lg";
+
       if (movie.release_date) {
         const release = document.createElement('p');
-        release.textContent = `Date de sortie: ${movie.release_date}`;
-        release.className = "font-dosis text-sm text-white text-center mb-2";
-        card.appendChild(release);
+        release.textContent = `📅 Date de sortie: ${movie.release_date}`;
+        release.className = "font-dosis text-sm text-gray-200 mb-2";
+        infoSection.appendChild(release);
       }
 
-      // genres
       if (movie.genres && movie.genres.length > 0) {
         const genres = document.createElement('p');
-        genres.textContent = `Genres: ${movie.genres.map(g => g.name).join(', ')}`;
-        genres.className = "font-dosis text-sm text-white text-center mb-2";
-        card.appendChild(genres);
+        genres.textContent = `🎬 Genres: ${movie.genres.map(g => g.name).join(', ')}`;
+        genres.className = "font-dosis text-sm text-gray-200";
+        infoSection.appendChild(genres);
       }
 
-      // description
+      detailsCol.appendChild(infoSection);
+
+      // Section: Description
       if (movie.overview) {
+        const descSection = document.createElement('div');
+        descSection.className = "bg-slate-700 p-4 rounded-lg";
+
+        const descTitle = document.createElement('h4');
+        descTitle.textContent = 'Synopsis';
+        descTitle.className = "font-dosis text-sm font-bold text-fuchsia-300 mb-2";
+        descSection.appendChild(descTitle);
+
         const overview = document.createElement('p');
         overview.textContent = movie.overview;
-        overview.className = "font-dosis text-sm text-white text-center mt-2";
-        card.appendChild(overview);
+        overview.className = "font-dosis text-xs text-gray-100 leading-relaxed";
+        descSection.appendChild(overview);
+
+        detailsCol.appendChild(descSection);
       }
 
+      // Section: Casting
+      if (movie.credits && movie.credits.cast && movie.credits.cast.length > 0) {
+        const castSection = document.createElement('div');
+        castSection.className = "bg-slate-700 p-4 rounded-lg";
+        
+        const castTitle = document.createElement('h4');
+        castTitle.textContent = 'Casting';
+        castTitle.className = "font-dosis text-sm font-bold text-fuchsia-300 mb-3";
+        castSection.appendChild(castTitle);
+
+        const castGrid = document.createElement('div');
+        castGrid.className = "flex flex-wrap gap-3";
+
+        const topCast = movie.credits.cast.slice(0, 6);
+        topCast.forEach(actor => {
+          const actorCard = document.createElement('div');
+          actorCard.className = "text-center flex flex-col items-center";
+
+          if (actor.profile_path) {
+            const actorImg = document.createElement('img');
+            actorImg.src = `https://image.tmdb.org/t/p/w185${actor.profile_path}`;
+            actorImg.alt = actor.name;
+            actorImg.className = "w-16 h-16 rounded-full object-cover mb-1 border-2 border-fuchsia-400";
+            actorCard.appendChild(actorImg);
+          }
+
+          const actorName = document.createElement('p');
+          actorName.textContent = actor.name;
+          actorName.className = "font-dosis text-xs text-white truncate w-20";
+          actorCard.appendChild(actorName);
+
+          castGrid.appendChild(actorCard);
+        });
+
+        castSection.appendChild(castGrid);
+        detailsCol.appendChild(castSection);
+      }
+
+      card.appendChild(detailsCol);
       moviesContainer.appendChild(card);
     } else {
       if (searchQuery) {
