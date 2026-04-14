@@ -99,7 +99,7 @@ app.get("/api/movie/:id", async (req, res) => {
   const id = req.params.id;
   const language = "fr-FR";
 
-  const movieUrl = `https://api.themoviedb.org/3/movie/${id}?api_key=${process.env.TMDB_TOKEN}&language=${language}`;
+  const movieUrl = `https://api.themoviedb.org/3/movie/${id}?api_key=${process.env.TMDB_TOKEN}&language=${language}&append_to_response=credits`;
 
   try {
     const response = await fetch(movieUrl);
