@@ -54,6 +54,10 @@ document.getElementById("avatarBtn").addEventListener("click", () => {
   window.location.href = "/profile";
 });
 
+document.getElementById("avatar2Btn").addEventListener("click", () => {
+  window.location.href = "/profile";
+});
+
 fetchMovies("upcoming", "upcoming");
 fetchMovies("popular", "popular");
 fetchMovies("top_rated", "top-rated");
