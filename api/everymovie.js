@@ -92,7 +92,7 @@ async function fetchMovies(searchQuery = '') {
         setPageTitle(`Résultats pour : ${searchQuery}`);
         console.log('Recherche:', searchQuery, movies);
       } else {
-        setPageTitle('Tous les films');
+        setPageTitle('All movies');
       }
 
       if (!movies || movies.length === 0) {
