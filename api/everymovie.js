@@ -317,6 +317,37 @@ async function fetchMovies(searchQuery = "") {
 
         fullCastSection.appendChild(fullCastGrid);
 
+        // trailer section
+      try {
+        const videoRes = await fetch(`/api/movie/${movie.id}/videos`);
+        const videoData = await videoRes.json();
+
+        if (videoData && videoData.key) {
+          const trailerSection = document.createElement('div');
+          trailerSection.className = "bg-slate-700 p-6 rounded-xl border-l-4 border-fuchsia-400 mt-6";
+          
+          trailerSection.innerHTML = `
+            <h4 class="font-dosis text-2xl font-bold text-fuchsia-400 mb-4 flex items-center gap-2">
+              <i data-lucide="play-circle"></i> Trailer
+            </h4>
+            <div class="relative w-full aspect-video">
+              <iframe 
+                class="absolute top-0 left-0 w-full h-full rounded-lg shadow-lg"
+                src="https://www.youtube.com/embed/${videoData.key}" 
+                title="YouTube video player" 
+                frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen>
+              </iframe>
+            </div>
+          `;
+          card.appendChild(trailerSection);
+          lucide.createIcons();
+        }
+      } catch (err) {
+        console.error("Error trailer:", err);
+      }
+
         // "show less" button
         const lessBtn = document.createElement("button");
         lessBtn.textContent = "Show less";

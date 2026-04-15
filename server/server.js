@@ -127,6 +127,26 @@ app.get("/api/movies/genre", async (req, res) => {
   }
 });
 
+// API to get the trailer of the movies
+app.get("/api/movie/:id/videos", async (req, res) => {
+  const id = req.params.id;
+  const apiKey = process.env.TMDB_TOKEN;
+  const url = `https://api.themoviedb.org/3/movie/${id}/videos?api_key=${apiKey}&language=fr-FR`;
+
+  try {
+    const response = await fetch(url);
+    const data = await response.json();
+    
+    const trailer = data.results.find(vid => vid.type === "Trailer" && vid.site === "YouTube");
+    
+    const video = trailer || data.results.find(vid => vid.site === "YouTube");
+    
+    res.json(video); 
+  } catch (err) {
+    res.status(500).json({ error: "Impossible to get the video" });
+  }
+});
+
 // add film to favorites
 app.post("/api/favorites/add", (req, res) => {
   const { username, movie_id, title, poster } = req.body;
