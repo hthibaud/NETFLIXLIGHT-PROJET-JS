@@ -1,7 +1,7 @@
 # FlixPork (NetflixLight project) Web Application
 
 ## Overview
-FlixPork is a lightweight web application inspired by Netflix, built with JavaScript, HTML and TailwindCSS. It allows users to browse movies, manage their profiles, and curate personal watchlists and favorites.
+FlixPork is a lightweight web application inspired by Netflix, built with JavaScript, HTML and TailwindCSS. It allows users to browse movies, manage their profiles, and have personal watchlists and favorites.
 
 ## Features
 
