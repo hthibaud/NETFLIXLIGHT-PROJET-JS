@@ -1,80 +1,117 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dosis:wght@200..800&display=swap">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sekuya&display=swap">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <style>
-    .font-dosis {
-      font-family: 'Dosis', sans-serif;
-    }
-    .font-sekuya {
-        font-family: 'Sekuya', sans-serif;
-    }
-</style>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Dosis:wght@200..800&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Sekuya&display=swap"
+    />
 
+    <style>
+      .font-dosis {
+        font-family: "Dosis", sans-serif;
+      }
+      .font-sekuya {
+        font-family: "Sekuya", sans-serif;
+      }
+    </style>
 
+    <script src="https://cdn.tailwindcss.com"></script>
 
-  <script src="https://cdn.tailwindcss.com"></script>
+    <title>Profile</title>
 
-  <title>Profile</title>
+    <link rel="icon" type="image/png" href="../static/img/logo-f-purple.png" />
+    <link
+      rel="image"
+      type="image/jpg"
+      href="../static/img/blurred_movies.jpg"
+    />
+  </head>
 
-  <link rel="icon" type="image/png" href="../static/img/logo-f-purple.png">
-  <link rel="image" type="image/jpg" href="../static/img/blurred_movies.jpg">
+  <body class="bg-slate-900 text-white">
+    <header class="bg-indigo-950 p-10 text-fuchsia-400 relative">
+      <h1 class="font-sekuya text-7xl font-bold">My favorites</h1>
+      <h6 class="font-sekuya text-3xl">FLIXPORK</h6>
 
-</head>
+      <div class="absolute bottom-5 right-5 flex items-center gap-6">
+        <a
+          href="/carroussel"
+          class="font-dosis text-fuchsia-400 text-lg hover:text-white transition-colors uppercase cursor-pointer"
+        >
+          Home
+        </a>
 
-<body class="bg-slate-900 text-white">
+        <a
+          href="/allmovies"
+          class="font-dosis text-fuchsia-400 text-lg hover:text-white transition-colors uppercase cursor-pointer"
+        >
+          Search
+        </a>
 
-  <header class="bg-indigo-950 p-10 text-fuchsia-400">
-    <h1 class="font-sekuya text-7xl font-bold">My favorites</h1>
-    <h6 class="font-sekuya text-3xl">FLIXPORK</h6>
+        <button
+          id="watchlistBtn"
+          class="font-dosis text-fuchsia-400 text-lg hover:text-white transition-colors uppercase cursor-pointer"
+        >
+          Watchlist
+        </button>
 
-  </header>
-  
-  <main class="p-10">
-    <div id="movies-container" class="flex flex-wrap gap-6">
-        </div>
-</main>
+        <button
+          id="avatarBtn"
+          class="w-12 h-12 rounded-full border-2 border-fuchsia-500 overflow-hidden shadow-lg hover:scale-110 hover:border-fuchsia-300 transition-all duration-300"
+        >
+          <img
+            src="/static/img/icon-persona.png"
+            alt="User Avatar"
+            class="w-full h-full object-cover"
+          />
+        </button>
+      </div>
+    </header>
 
-  <div class="mt-auto flex justify-between items-end px-10 pb-4 w-full">
-    <div></div>
-    <button id="logoutBtn" class="bg-red-900 text-white px-4 py-2 rounded text-sm w-fit">Logout</button>
-  </div>
+    <main class="p-10">
+      <div id="movies-container" class="flex flex-wrap gap-6"></div>
+    </main>
 
-<footer class="bg-indigo-950 p-10 text-fuchsia-400 relative">
+    <div class="mt-auto flex justify-between items-end px-10 pb-4 w-full">
+      <div></div>
+      <button
+        id="logoutBtn"
+        class="bg-red-900 text-white px-4 py-2 rounded text-sm w-fit"
+      >
+        Logout
+      </button>
+    </div>
 
-        <h1 class="font-sekuya text-left text-7xl font-bold">FLIXPORK</h1>
+    <footer class="bg-indigo-950 p-10 text-fuchsia-400 relative">
+      <h1 class="font-sekuya text-left text-7xl font-bold">FLIXPORK</h1>
 
-      <div class = "absolute bottom-4 right-10 flex items-center gap-4">
+      <div class="absolute bottom-4 right-10 flex items-center gap-4">
+        <h6 class="font-dosis text-fuchsia-400">My profile</h6>
 
-        <h6 class = "font-dosis text-fuchsia-400" >
-        My profile
-      </h6>
+        <button
+          id="avatar2Btn"
+          class="w-12 h-12 rounded-full border-2 border-fuchsia-500 overflow-hidden shadow-lg hover:scale-110 hover:border-fuchsia-300 transition-all duration-300"
+        >
+          <img
+            src="../static/img/icon-persona.png"
+            alt="User Avatar"
+            class="w-full h-full object-cover"
+          />
+        </button>
+      </div>
+    </footer>
 
-  <button id="avatar2Btn" 
-            class="w-12 h-12 rounded-full border-2 border-fuchsia-500 
-                   overflow-hidden shadow-lg hover:scale-110 
-                   hover:border-fuchsia-300 transition-all duration-300">
-      
-      <img src="../static/img/icon-persona.png" 
-           alt="User Avatar" 
-           class="w-full h-full object-cover">
-           
-    </button>
+    <script type="module" src="../../api/profile.js"></script>
+    <script type="module" src="../../api/list.js"></script>
+    <script type="module" src="../../api/carroussel.js"></script>
 
-</div>
-
-</footer>
-
-
-  <script type="module" src="../../api/profile.js"></script>
-  <script type="module" src="../../api/list.js"></script>
-
-</body>
+  </body>
 </html>

@@ -30,14 +30,49 @@
 </head>
 
 
-<body class= "min-h-screen
+<!-- <body class= "min-h-screen
              bg-[url('../static/img/blurred_movies.jpg')]
-             bg-cover bg-center bg-no-repeat">
+             bg-cover bg-center bg-no-repeat"> -->
+    <body class = "bg-slate-900">
 
-    <header class="bg-indigo-950 p-10 text-fuchsia-400">
+    <header class="bg-indigo-950 p-10 text-fuchsia-400 relative">
 
         <h1 class="font-sekuya text-left text-7xl font-bold">FLIXPORK</h1>
       <h6 class="font-dosis text-left text-2xl">WHAT WILL YOU WATCH TODAY?</h6>
+
+      <div class="absolute bottom-5 right-5 flex items-center gap-6">
+
+          <a href="/carroussel" 
+                class="font-dosis text-fuchsia-400 text-lg hover:text-white transition-colors uppercase cursor-pointer">
+            Home
+</a>
+
+  <a href="/allmovies" 
+                class="font-dosis text-fuchsia-400 text-lg hover:text-white transition-colors uppercase cursor-pointer">
+            Search
+</a>
+        
+        <button id="favBtn" 
+                class="font-dosis text-fuchsia-400 text-lg hover:text-white transition-colors uppercase cursor-pointer">
+            Favorites
+        </button>
+
+        <button id="watchlistBtn" 
+                class="font-dosis text-fuchsia-400 text-lg hover:text-white transition-colors uppercase cursor-pointer">
+            Watchlist
+        </button>
+
+          <button id="avatarBtn" 
+            class="w-12 h-12 rounded-full border-2 border-fuchsia-500 
+                   overflow-hidden shadow-lg hover:scale-110 
+                   hover:border-fuchsia-300 transition-all duration-300">
+      
+      <img src="/static/img/icon-persona.png" 
+           alt="User Avatar" 
+           class="w-full h-full object-cover">
+           
+    </button>
+</div>
 
     </header>
 
@@ -57,6 +92,10 @@
       </a>
     </div>
   </div>
+
   <script type="module" src="/api/banner.js"></script>
+  <script type="module" src="/api/profile.js"></script>
+  <script type="module" src="/api/carroussel.js"></script>
+
 </body>
 </html>

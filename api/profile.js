@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         favorites.forEach(movie => {
             const card = document.createElement('div');
-            card.className = "min-w-[200px] bg-slate-800 p-3 rounded-lg flex flex-col items-center";
+            card.className = "w-[250px] bg-slate-800 p-3 rounded-lg flex flex-col items-center";
             card.innerHTML = `
                 <img src="${movie.movie_poster}" class="rounded-lg mb-2 w-full">
                 <h3 class="font-dosis text-sm text-fuchsia-300 text-center">${movie.movie_title}</h3>
@@ -73,7 +73,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         watchlist.forEach(movie => {
             const card = document.createElement('div');
-            card.className = "min-w-[200px] bg-slate-800 p-3 rounded-lg flex flex-col items-center";
+            card.className = "w-[250px] bg-slate-800 p-3 rounded-lg flex flex-col items-center";
             card.innerHTML = `
                 <img src="${movie.movie_poster}" class="rounded-lg mb-2 w-full">
                 <h3 class="font-dosis text-sm text-fuchsia-300 text-center">${movie.movie_title}</h3>
