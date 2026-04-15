@@ -32,6 +32,7 @@ FlixPork is a lightweight web application inspired by Netflix, built with JavaSc
 - **Frontend**: HTML, CSS, JavaScript
 - **Backend**: Node.js server
 - **API**: TMDB (themovieDB)
+- **Project Management**: Notion (link -> https://www.notion.so/31a6c25064e880a1ab7cec2771921d5e?v=31a6c25064e8801ca037000c8d99d70b)
 
 ## Start the project
 - Clone the repo with the command "git clone https://github.com/hthibaud/NETFLIXLIGHT-PROJET-JS"
