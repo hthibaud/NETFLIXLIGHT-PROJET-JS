@@ -35,6 +35,7 @@ FlixPork is a lightweight web application inspired by Netflix, built with JavaSc
 
 ## Start the project
 - Clone the repo
+- Launch the command "npm install express" in your terminal if you don't have express.js yet
 - Launch the server with the command "node server/server.js" at the root of the project
 - The server is now open on http://localhost:3000/
 - Have fun !
