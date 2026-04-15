@@ -23,6 +23,7 @@ function toggleSearchAndPagination(visible) {
   });
 }
 
+//sets the pages titles
 function setPageTitle(title) {
   const titleEl = document.getElementById("pageTitle");
   if (titleEl) {
@@ -30,6 +31,7 @@ function setPageTitle(title) {
   }
 }
 
+//fetches movies and shows detailed infos
 async function fetchMovies(searchQuery = "") {
   currentSearch = searchQuery;
   try {
@@ -66,14 +68,8 @@ async function fetchMovies(searchQuery = "") {
       topSection.appendChild(imageCol);
 
       // Info block
-
       const infoCol = document.createElement("div");
       infoCol.className = "space-y-6";
-
-      // const title = document.createElement("h3");
-      // title.textContent = movie.title;
-      // title.className = "font-dosis text-4xl font-bold text-fuchsia-400";
-      // infoCol.appendChild(title);
 
       const titleContainer = document.createElement("div");
       titleContainer.className = "flex flex-wrap items-center gap-4 mb-4";
@@ -86,6 +82,7 @@ async function fetchMovies(searchQuery = "") {
       const btnGroup = document.createElement("div");
       btnGroup.className = "flex gap-2";
 
+      // shows the icons "star" for favorites and the icon for watchlist
       btnGroup.innerHTML = `
   <button id="fav-detail-btn" class="bg-slate-700 hover:bg-fuchsia-600 text-white p-2 rounded-lg transition-all shadow-md group" title="Add to Favorites">
     <i data-lucide="star" class="w-6 h-6 group-hover:fill-current"></i>
@@ -95,8 +92,9 @@ async function fetchMovies(searchQuery = "") {
   </button>
 `;
 
+      // adds the title + the infos in the details infos container
       titleContainer.appendChild(btnGroup);
-      infoCol.appendChild(titleContainer); // On ajoute le conteneur complet à la colonne d'infos
+      infoCol.appendChild(titleContainer);
 
       const quickInfoGrid = document.createElement("div");
       quickInfoGrid.className = "grid grid-cols-1 sm:grid-cols-2 gap-4";
@@ -118,7 +116,7 @@ async function fetchMovies(searchQuery = "") {
           "font-dosis text-sm text-gray-100 mb-4 leading-tight";
         genreDateBox.appendChild(genres);
       }
-
+        // prints the date in the detailed infos
       if (movie.release_date) {
         const releaseInfo = document.createElement("p");
         releaseInfo.textContent = `Release date: ${movie.release_date}`;
@@ -132,6 +130,7 @@ async function fetchMovies(searchQuery = "") {
       actionsBox.className =
         "bg-slate-700 p-5 rounded-xl border-l-4 border-fuchsia-400 flex flex-col justify-between gap-4";
 
+      // prints the main actors in the detailed infos
       const actionLabel = document.createElement("p");
       actionLabel.textContent = "Main actors";
       actionLabel.className = "font-dosis text-2xl font-bold text-fuchsia-400";
@@ -192,7 +191,8 @@ async function fetchMovies(searchQuery = "") {
         const descSection = document.createElement("div");
         descSection.className =
           "bg-slate-700 p-6 rounded-xl border-l-4 border-fuchsia-400";
-
+        
+        // prints the synopsys of the movie in the detailed infos
         const descTitle = document.createElement("h4");
         descTitle.textContent = "Synopsys";
         descTitle.className =
@@ -224,34 +224,11 @@ async function fetchMovies(searchQuery = "") {
       const detailsGrid = document.createElement("div");
       detailsGrid.className = "grid grid-cols-2 md:grid-cols-4 gap-4";
 
-      // Average mark
-      if (movie.vote_average) {
-        const ratingBox = document.createElement("div");
-        ratingBox.className = "text-center";
-
-        const ratingIcon = document.createElement("p");
-        ratingIcon.textContent = "⭐";
-        ratingIcon.className = "text-2xl mb-1";
-        ratingBox.appendChild(ratingIcon);
-
-        const ratingValue = document.createElement("p");
-        ratingValue.textContent = `${movie.vote_average.toFixed(1)}/10`;
-        ratingValue.className = "font-dosis text-sm font-bold text-white";
-        ratingBox.appendChild(ratingValue);
-
-        const ratingLabel = document.createElement("p");
-        ratingLabel.textContent = "Note";
-        ratingLabel.className = "font-dosis text-xs text-gray-300";
-        ratingBox.appendChild(ratingLabel);
-
-        detailsGrid.appendChild(ratingBox);
-      }
-
       // Additional details section
       const moreGrid = document.createElement("div");
       moreGrid.className = "grid grid-cols-2 md:grid-cols-4 gap-4";
 
-      // On injecte le HTML avec les icônes Lucide
+      // Injects the HtML with the lucid icons
       moreGrid.innerHTML = `
         <div class="text-center flex flex-col items-center">
           <i data-lucide="star" class="text-yellow-400 w-8 h-8 mb-2"></i>
@@ -592,6 +569,8 @@ if (document.readyState === "loading") {
   fetchMovies();
 }
 
+
+// adds movies to the collection (either favorites or watchlist)
 async function addToCollection(type, movie) {
   const username = localStorage.getItem("userPseudo");
   if (!username || username === "Guest") {

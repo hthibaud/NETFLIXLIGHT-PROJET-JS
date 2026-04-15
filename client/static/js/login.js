@@ -6,12 +6,12 @@ document.getElementById("loginForm").addEventListener("submit", async (e) => {
   const pass = document.getElementById("loginPassword").value;
   const msgBox = document.getElementById("loginMessage");
 
-  // Loading effect *style*
+  // Loading effect for *style*
   msgBox.textContent = "Checking credentials...";
   msgBox.className = "mt-4 text-center font-dosis font text-fuchsia-500";
 
   try {
-    // Hash the password using Web Crypto API
+    // Hash the password using Web Crypto API (using SHA-256)
     const encoder = new TextEncoder();
     const pwData = await crypto.subtle.digest("SHA-256", encoder.encode(pass));
     const hashArray = Array.from(new Uint8Array(pwData));

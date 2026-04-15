@@ -306,6 +306,7 @@ app.post("/api/register", (req, res) => {
   );
 });
 
+//route to profile page
 app.get("/profile", (req, res) => {
   res.sendFile(path.join(__dirname, "../client/templates/profile.html"));
 });

@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     
 
-
+    // prints the right pseudo on the user's page
     if (bannerPseudo) {
         bannerPseudo.textContent = `Your profile, ${pseudo}`;
         profileName.textContent = `${name}`;
@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         });
 
     } catch (err) {
-        console.error("Erreur watchlist:", err);
+        console.error("Error favorites:", err);
     }
 
     try {
@@ -82,6 +82,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         });     
         
     } catch (err) {
-        console.error("Erreur watchlist:", err);
+        console.error("Error watchlist:", err);
     }
 });

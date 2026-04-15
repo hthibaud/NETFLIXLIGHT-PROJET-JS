@@ -134,7 +134,7 @@ async function fetchMoviesByGenre(genreId, containerId) {
       <i data-lucide="bookmark" class="w-5 h-5"></i>
     </button>
 `;
-
+      // (creates the little icons for favorites and watchlist)
       lucide.createIcons();
 
       imgContainer.appendChild(overlay);
@@ -211,6 +211,7 @@ async function addToCollection(type, movie) {
   }
 }
 
+// removes movies to the collection (either favorites or watchlist)
 async function removeFromCollection(type, movie) {
   const username = localStorage.getItem("userPseudo");
   if (!username) {

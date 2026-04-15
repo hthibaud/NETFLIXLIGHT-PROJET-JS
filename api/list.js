@@ -3,6 +3,8 @@ document.addEventListener('DOMContentLoaded', () => {
     loadCollection(type);
 });
 
+
+// loads the collection from the user into the new page
 async function loadCollection(type) {
     const pseudo = localStorage.getItem('userPseudo');
     const container = document.getElementById('movies-container');
@@ -53,6 +55,7 @@ async function loadCollection(type) {
     }
 }
 
+// removes movies to the collection (either favorites or watchlist)
 async function removeFromCollection(type, movie) {
   const username = localStorage.getItem("userPseudo");
 
