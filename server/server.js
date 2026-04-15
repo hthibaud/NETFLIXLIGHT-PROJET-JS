@@ -281,7 +281,7 @@ app.get("/account_creation", (req, res) => {
   );
 });
 
-app.get("/carroussel", (req, res) => {
+app.get("/home", (req, res) => {
   res.sendFile(path.join(__dirname, "../client/templates/carroussel.html"));
 });
 app.get("/index", (req, res) => {
