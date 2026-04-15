@@ -33,4 +33,10 @@ FlixPork is a lightweight web application inspired by Netflix, built with JavaSc
 - **Backend**: Node.js server
 - **API**: TMDB (themovieDB)
 
+## Start the project
+- Clone the repo
+- Launch the server with the command "node server/server.js" at the root of the project
+- The server is now open on http://localhost:3000/
+- Have fun !
+
 Built by Thibaud & Yanaël
